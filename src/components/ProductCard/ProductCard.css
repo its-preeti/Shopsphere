@@ -86,7 +86,13 @@
 
   transition: 0.8s ease;
 }
+.product-card button{
+  padding: 20px 40px;
+  font-size: 1.1rem;
+   
 
+  width: auto; /* agar full width hai toh */
+}
 .product-info button:hover {
   background: #ff7b1f;
 }

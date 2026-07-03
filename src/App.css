@@ -1,58 +1,65 @@
-
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+body{
   font-family: Arial, sans-serif;
 
-  background:#121212 ;
-
+  background: #121212;
   color: white;
 
   overflow-x: hidden;
 }
 
-/* Orange Glow */
+/* MAIN THEMES */
 
-body::before {
-  content: "";
+.dark-theme,
+.light-theme{
+  position: relative;
 
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+.dark-theme{
+  background: #121212;
+  color: white;
+}
+
+.light-theme{
+  background: white;
+  color: black;
+}
+
+/* ORANGE GLOW */
+
+.orange-glow{
   position: fixed;
 
-  top: -200px;
-  right: -200px;
+  top: -250px;
+  right: -250px;
 
-  width: 500px;
-  height: 500px;
+  width: 700px;
+  height: 700px;
+
+  border-radius: 50%;
 
   background:
-    radial-gradient(
-      circle,
-      rgba(255,106,0,0.25),
-      transparent 70%
-    );
+  radial-gradient(
+    circle,
+    rgba(255,102,0,0.30) 0%,
+    rgba(255,102,0,0.18) 30%,
+    transparent 70%
+  );
 
-  z-index: -1;
+  filter: blur(90px);
+
+  pointer-events: none;
+
+  z-index: 0;
 }
-
-.light-theme {
-
-background: white;
-
-color: black;
-
-min-height: 100vh;
-}
-
-.dark-theme {
-
-background: #111;
-
-color: white;
-
-min-height: 100vh;
-}
-

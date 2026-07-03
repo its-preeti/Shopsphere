@@ -33,12 +33,17 @@ function App() {
 
   return (
     <div
+
       className={
         darkMode
           ? "dark-theme"
           : "light-theme"
       }
     >
+            {/* ORANGE GLOW */}
+      <div className="orange-glow"></div>
+
+
       <Navbar />
 
       <Routes>

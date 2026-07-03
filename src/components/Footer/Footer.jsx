@@ -1,20 +1,33 @@
 import "./Footer.css";
 
 function Footer() {
+
   return (
+
     <footer className="footer">
 
-      <h2>ShopSphere</h2>
+      <div className="footer-container">
 
-      <p>Premium E-Commerce Platform.</p>
+        <div className="footer-logo">
+          <h2>ShopSphere</h2>
 
-      <div className="footer-links">
-        <a href="/">About Us</a>
-        <a href="/">Return Policy</a>
-        <a href="/">Disclaimer</a>
+          <p>Premium E-Commerce Platform.</p>
+        </div>
+
+        <div className="footer-links">
+          <a href="/">About Us</a>
+          <a href="/">Return Policy</a>
+          <a href="/">Disclaimer</a>
+        </div>
+
       </div>
 
+      <p className="footer-bottom">
+        ©2026 ShopSphere. All rights reserved.
+      </p>
+
     </footer>
+
   );
 }
 

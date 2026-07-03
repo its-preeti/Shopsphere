@@ -3,11 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background:
-    radial-gradient(circle at top left, #ff7a00 0%, transparent 25%),
-    radial-gradient(circle at bottom right, #ff5100 0%, transparent 25%),
-    #0f0f0f;
+  position: relative;
+  overflow: hidden;
+  
 
   padding: 20px;
 }
@@ -125,4 +123,46 @@
 
 .auth-text span:hover {
   text-decoration: underline;
+}
+/* TOP ANIMATED LINE */
+.auth-box::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 200%;
+  height: 3px;
+
+  border-radius: 50px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ff7a00,
+    transparent
+  );
+
+  animation: moveLine 6s linear infinite;
+}
+
+
+
+.auth-box {
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* ANIMATION */
+@keyframes moveLine {
+  2% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }

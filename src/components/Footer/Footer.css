@@ -1,43 +1,39 @@
 .footer{
   width: 100%;
-
   background:#121212;
-
   padding: 50px 30px;
-
   margin-top: 60px;
-
   color: white;
 }
 
 .footer h2{
   color: #ff6a00;
-
   font-size: 2rem;
-
   margin-bottom: 10px;
 }
 
 .footer p{
   color: #aaa;
-
   margin-bottom: 25px;
 }
 
 .footer-links{
   display: flex;
-
   gap: 25px;
-
   flex-wrap: wrap;
+
+  margin-bottom: 30px; /* links aur niche text ke bich gap */
 }
 
 .footer-links a{
   color: #ccc;
-
   text-decoration: none;
 }
 
 .footer-links a:hover{
   color: #ff6a00;
+}
+
+.footer-bottom{
+  margin-top: 20px; /* extra spacing */
 }

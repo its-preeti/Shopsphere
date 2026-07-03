@@ -14,7 +14,7 @@ function Home() {
 
           <h1>
             Welcome <br />
-            to Shopsphere
+            to ShopSphere
           </h1>
 
           <p>
