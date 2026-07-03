@@ -20,16 +20,19 @@ import { WishlistContext } from "../../context/WishlistContext";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 function Navbar() {
+
   const { cartItems } = useContext(CartContext);
   const { wishlistItems } = useContext(WishlistContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+
     <nav className="navbar">
-      
+
       {/* Logo */}
       <div className="logo">
+
         <img
           src="https://cdn-icons-png.flaticon.com/128/10856/10856545.png"
           alt="logo"
@@ -40,11 +43,13 @@ function Navbar() {
         </h1>
 
         <div className="dot"></div>
+
       </div>
 
-      {/* Desktop Links */}
+      {/* NAV LINKS */}
+
       <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-        
+
         <li>
           <Link to="/">
             <FiHome />
@@ -63,9 +68,11 @@ function Navbar() {
           <Link to="/cart">
             <FiShoppingCart />
             Cart
+
             <span className="badge">
               {cartItems.length}
             </span>
+
           </Link>
         </li>
 
@@ -73,9 +80,11 @@ function Navbar() {
           <Link to="/wishlist">
             <FiHeart />
             Wishlist
+
             <span className="badge">
               {wishlistItems.length}
             </span>
+
           </Link>
         </li>
 
@@ -103,16 +112,22 @@ function Navbar() {
         <li>
           <ThemeToggle />
         </li>
+
       </ul>
 
-      {/* Mobile Menu Button */}
+      {/* MOBILE MENU */}
+
       <div
         className="menu-icon"
         onClick={() => setMenuOpen(!menuOpen)}
       >
+
         {menuOpen ? <FiX /> : <FiMenu />}
+
       </div>
+
     </nav>
+
   );
 }
 
