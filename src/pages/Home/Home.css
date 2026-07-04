@@ -18,7 +18,7 @@
 
   padding:35px 20px;
 
-  font-family:  sans-serif;
+  font-weight: bold;
 }
 
 .hero-box{
@@ -53,7 +53,7 @@
 
   font-size:6rem;
 
-  font-weight:400;
+  font-weight:bold;
 
   line-height:1.1;
 
@@ -216,12 +216,12 @@
 
    .hero{
   min-height: auto;
-  padding: 20px 15px;
+  padding: 30px 20px;
 }
 
   .hero-box{
-    width: 90%;
-    padding: 40px 20px;
+    width: 95%;
+    padding: 60px 30px;
     border-radius: 20px;
     margin: auto;
   }
