@@ -216,12 +216,12 @@
 
    .hero{
   min-height: auto;
-  padding: 10px 15px;
+  padding: 20px 15px;
 }
 
   .hero-box{
-    width: 100%;
-    padding: 20px 15px;
+    width: 90%;
+    padding: 40px 20px;
     border-radius: 20px;
     margin: auto;
   }
