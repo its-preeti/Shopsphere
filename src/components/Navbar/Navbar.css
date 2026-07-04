@@ -1,8 +1,7 @@
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  radial-gradient(circle at top right, #ff7a00 0%, transparent 25%)
 }
 
 .navbar {
