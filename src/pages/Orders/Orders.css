@@ -7,6 +7,8 @@
   padding: 80px 0;
 
   color: white;
+
+  min-height: 80vh;
 }
 
 .orders h1 {
@@ -37,7 +39,7 @@
   border-radius: 20px;
 
   background:
-    rgba(255,255,255,0.05);
+    #070d21;
 
   border:
     1px solid rgba(255,255,255,0.08);

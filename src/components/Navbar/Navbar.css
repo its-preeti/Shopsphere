@@ -1,13 +1,20 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+
 .navbar {
   width: 100%;
   height: 80px;
   padding: 0 5%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,13 +23,13 @@
   top: 0;
   z-index: 999;
 
-  background: rgba(0, 0, 0, 0.65);
+  background: #070d21;
   backdrop-filter: blur(15px);
 
-  border-bottom: 1px solid rgba(255, 166, 0, 0.2);
+  border-bottom: 1px solid rgba(30, 58, 138, 0.3);
 }
 
-/* Logo */
+/* ================= LOGO ================= */
 
 .logo {
   display: flex;
@@ -31,8 +38,8 @@
 }
 
 .logo img {
-  width: 30px;
-  box-shadow: 0 0 5px  #ff6a00;
+  width: 32px;
+  box-shadow: 0 0 8px #1e3a8a;
 }
 
 .logo h1 {
@@ -42,19 +49,18 @@
 }
 
 .logo span {
-  color:  #ff6a00;
-  
+  color: #1744c1;
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background:  #ff6a00;
-  box-shadow: 0 0 10px  #ff6a00;
+  background: #1e3a8a;
+  box-shadow: 0 0 10px #1e3a8a;
 }
 
-/* Links */
+/* ================= NAV LINKS ================= */
 
 .nav-links {
   display: flex;
@@ -64,11 +70,9 @@
 }
 
 .nav-links li a {
-  position: relative;
-
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 
   text-decoration: none;
   color: #ddd;
@@ -76,10 +80,10 @@
   padding: 10px 16px;
   border-radius: 12px;
 
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 500;
 
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .nav-links li a:hover {
@@ -87,12 +91,9 @@
   color: white;
 }
 
-/* Badge */
+/* ================= BADGE ================= */
 
 .badge {
-  color: white;
-  background:  #ff6a00;
-
   width: 20px;
   height: 20px;
 
@@ -102,19 +103,17 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 0.75rem;
+  background: #1e3a8a;
+  color: white;
+
+  font-size: 12px;
   font-weight: bold;
 }
 
-/* Login Button */
+/* ================= LOGIN ================= */
 
 .login-btn {
-  background: linear-gradient(
-    135deg,
-    orange,
-    #ff7b00
-  );
-
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white !important;
 }
 
@@ -122,7 +121,7 @@
   transform: translateY(-2px);
 }
 
-/* Menu Icon */
+/* ================= MENU ICON ================= */
 
 .menu-icon {
   display: none;
@@ -131,56 +130,22 @@
   cursor: pointer;
 }
 
-/* Mobile Responsive */
+/* ================= OVERLAY ================= */
 
-@media (max-width: 992px) {
-  .menu-icon {
-    display: block;
-  }
+.overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
 
-  .nav-links {
-    position: absolute;
+  width: 100%;
+  height: calc(100vh - 80px);
 
-    top: 80px;
-    left: 0;
+  background: rgba(0, 0, 0, 0.45);
 
-    width: 100%;
-
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(15px);
-
-    flex-direction: column;
-    align-items: flex-start;
-
-    padding: 25px;
-
-    gap: 18px;
-
-    max-height: 0;
-    overflow: hidden;
-
-    transition: 0.8s ease;
-  }
-
-  .nav-links.active {
-    max-height: 700px;
-  }
-
-  .nav-links li {
-    width: 100%;
-  }
-
-  .nav-links li a {
-    width: 100%;
-    padding: 14px;
-    border-radius: 14px;
-  }
-}
-body{
-overflow-x: hidden;
+  z-index: 999;
 }
 
-/* MOBILE RESPONSIVE */
+/* ================= MOBILE ================= */
 
 @media (max-width: 992px) {
 
@@ -190,38 +155,36 @@ overflow-x: hidden;
   }
 
   .nav-links {
+    position: fixed;
 
-    position: absolute;
     top: 80px;
-    left: 0;
+    left: -100%;
 
-    width: 100%;
+    width: 280px;
+    height: calc(100vh - 80px);
 
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(15px);
+    background: #070d21;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    padding: 0 25px;
-
     gap: 18px;
+    padding: 25px;
 
-    max-height: 0;
+    list-style: none;
 
-    overflow: hidden;
+    overflow-y: auto;
 
-    transition: max-height 0.5s ease,
-                padding 0.5s ease;
+    transition: left .35s ease;
+
+    z-index: 1000;
+
+    border-right: 1px solid rgba(255,255,255,.1);
   }
 
-  /* OPEN MENU */
-
   .nav-links.active {
-
-    max-height: 700px;
-    padding: 25px;
+    left: 0;
   }
 
   .nav-links li {
@@ -229,11 +192,30 @@ overflow-x: hidden;
   }
 
   .nav-links li a {
-
     width: 100%;
     padding: 14px;
+    border-radius: 12px;
+  }
 
-    border-radius: 14px;
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    width: 240px;
   }
 
 }

@@ -6,6 +6,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from"./components/Footer/Footer";
+import About from "./pages/About";
+import ReturnPolicy from "./pages/ReturnPolicy";
+import Disclaimer from "./pages/Disclaimer";
+import Contact from "./pages/Contact";
 
 import Home from "./pages/Home/Home";
 import Products from "./pages/Products/Products";
@@ -40,8 +44,8 @@ function App() {
           : "light-theme"
       }
     >
-            {/* ORANGE GLOW */}
-      <div className="orange-glow"></div>
+            {/* #2563eb GLOW */}
+      <div className="#2563eb-glow"></div>
 
 
       <Navbar />
@@ -102,8 +106,27 @@ function App() {
           path="/cart"
           element={<Cart />}
         />
-      </Routes>
-       
+      
+
+       <Route
+        path="/about" 
+       element={<About />} 
+       />
+        <Route 
+           path="/return-policy" 
+          element={<ReturnPolicy 
+          />} 
+         />
+       <Route 
+       path="/disclaimer"
+        element={<Disclaimer />} 
+        />
+      <Route 
+       path="/contact"
+        element={<Contact />} 
+        />
+
+        </Routes>
       <Footer />
     </div>
     

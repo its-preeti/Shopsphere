@@ -1,6 +1,9 @@
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+
+  const navigate = useNavigate();
 
   return (
 
@@ -13,8 +16,7 @@ function Home() {
         <div className="hero-box">
 
           <h1>
-            Welcome <br />
-            to ShopSphere
+            Welcome to ShopSphere
           </h1>
 
           <p>
@@ -23,11 +25,17 @@ function Home() {
 
           <div className="hero-buttons">
 
-            <button className="shop-btn">
+            <button
+              className="shop-btn"
+              onClick={() => navigate("/products")}
+            >
               Shop Now
             </button>
 
-            <button className="explore-btn">
+            <button
+              className="explore-btn"
+              onClick={() => navigate("/products")}
+            >
               Explore
             </button>
 
@@ -41,36 +49,24 @@ function Home() {
 
       <section className="categories">
 
-        <h2>
-          Categories
-        </h2>
+        <h2>Categories</h2>
 
         <div className="categories-container">
 
-          <div className="category-card">
-            Electronics
-          </div>
+          <div className="category-card">Electronics</div>
 
-          <div className="category-card">
-            Fashion
-          </div>
+          <div className="category-card">Fashion</div>
 
-          <div className="category-card">
-            Shoes
-          </div>
+          <div className="category-card">Shoes</div>
 
-          <div className="category-card">
-            Watches
-          </div>
+          <div className="category-card">Watches</div>
 
         </div>
 
       </section>
 
     </div>
-
   );
-
 }
 
 export default Home;

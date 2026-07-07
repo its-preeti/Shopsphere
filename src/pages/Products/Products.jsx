@@ -156,7 +156,8 @@ const Products = () => {
           Electronics
         </button>
       </div>
-
+      <br/>
+      <br/>
       <div className="products-grid">
         {filteredProducts.map((product) => (
           <ProductCard

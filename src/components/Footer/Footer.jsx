@@ -1,33 +1,40 @@
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
-
   return (
-
     <footer className="footer">
 
-      <div className="footer-container">
+      <div className="footer-logo">
+        <h2>ShopSphere</h2>
+      </div>
 
-        <div className="footer-logo">
-          <h2>ShopSphere</h2>
+      <div className="footer-content">
 
-          <p>Premium E-Commerce Platform.</p>
-        </div>
+        <p>Premium E-Commerce Platform.</p>
 
         <div className="footer-links">
-          <a href="/">About Us</a>
-          <a href="/">Return Policy</a>
-          <a href="/">Disclaimer</a>
+          <Link to="/about">About Us</Link>
+
+          <Link to="/return-policy">
+            Return Policy
+          </Link>
+
+          <Link to="/disclaimer">
+            Disclaimer
+          </Link>
+
+          <Link to="/contact">
+            Contact
+          </Link>
+
         </div>
+
+        <p>© 2026 ShopSphere. All rights reserved.</p>
 
       </div>
 
-      <p className="footer-bottom">
-        ©2026 ShopSphere. All rights reserved.
-      </p>
-
     </footer>
-
   );
 }
 

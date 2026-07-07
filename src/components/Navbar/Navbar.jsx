@@ -20,114 +20,107 @@ import { WishlistContext } from "../../context/WishlistContext";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 function Navbar() {
-
   const { cartItems } = useContext(CartContext);
   const { wishlistItems } = useContext(WishlistContext);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+    <>
+      <nav className="navbar">
 
-    <nav className="navbar">
+        {/* Logo */}
+        <div className="logo">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/10856/10856545.png"
+            alt="logo"
+          />
 
-      {/* Logo */}
-      <div className="logo">
+          <h1>
+            <span>ShopSphere</span>
+          </h1>
 
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/10856/10856545.png"
-          alt="logo"
-        />
+          <div className="dot"></div>
+        </div>
 
-        <h1>
-          <span>ShopSphere</span>
-        </h1>
+        {/* NAV LINKS */}
 
-        <div className="dot"></div>
+        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
 
-      </div>
+          <li>
+            <Link to="/" onClick={() => setMenuOpen(false)}>
+              <FiHome />
+              Home
+            </Link>
+          </li>
 
-      {/* NAV LINKS */}
+          <li>
+            <Link to="/products" onClick={() => setMenuOpen(false)}>
+              <FiShoppingBag />
+              Products
+            </Link>
+          </li>
 
-      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+          <li>
+            <Link to="/cart" onClick={() => setMenuOpen(false)}>
+              <FiShoppingCart />
+              Cart
+              <span className="badge">{cartItems.length}</span>
+            </Link>
+          </li>
 
-        <li>
-          <Link to="/">
-            <FiHome />
-            Home
-          </Link>
-        </li>
+          <li>
+            <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
+              <FiHeart />
+              Wishlist
+              <span className="badge">{wishlistItems.length}</span>
+            </Link>
+          </li>
 
-        <li>
-          <Link to="/products">
-            <FiShoppingBag />
-            Products
-          </Link>
-        </li>
+          <li>
+            <Link to="/analytics" onClick={() => setMenuOpen(false)}>
+              <FiBarChart2 />
+              Admin
+            </Link>
+          </li>
 
-        <li>
-          <Link to="/cart">
-            <FiShoppingCart />
-            Cart
+          <li>
+            <Link to="/orders" onClick={() => setMenuOpen(false)}>
+              <FiPackage />
+              Orders
+            </Link>
+          </li>
 
-            <span className="badge">
-              {cartItems.length}
-            </span>
+          <li>
+            <Link
+              to="/auth"
+              className="login-btn"
+              onClick={() => setMenuOpen(false)}
+            >
+              <FiUser />
+              Account
+            </Link>
+          </li>
 
-          </Link>
-        </li>
+          <li>
+            <ThemeToggle />
+          </li>
 
-        <li>
-          <Link to="/wishlist">
-            <FiHeart />
-            Wishlist
+        </ul>
 
-            <span className="badge">
-              {wishlistItems.length}
-            </span>
+        {/* MOBILE MENU */}
 
-          </Link>
-        </li>
+        <div
+          className="menu-icon"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </div>
 
-        <li>
-          <Link to="/analytics">
-            <FiBarChart2 />
-            Admin
-          </Link>
-        </li>
+      </nav>
 
-        <li>
-          <Link to="/orders">
-            <FiPackage />
-            Orders
-          </Link>
-        </li>
-
-        <li>
-          <Link to="/auth" className="login-btn">
-            <FiUser />
-            Account
-          </Link>
-        </li>
-
-        <li>
-          <ThemeToggle />
-        </li>
-
-      </ul>
-
-      {/* MOBILE MENU */}
-
-      <div
-        className="menu-icon"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-
-        {menuOpen ? <FiX /> : <FiMenu />}
-
-      </div>
-
-    </nav>
-
+      
+    </>
   );
 }
 

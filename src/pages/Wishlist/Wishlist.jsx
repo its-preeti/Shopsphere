@@ -18,6 +18,7 @@ function Wishlist() {
         <h1 className="wishlist-title">
           My Wishlist ❤️
         </h1>
+ <br />
 
         {wishlistItems.length === 0 ? (
 

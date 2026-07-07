@@ -1,5 +1,5 @@
 body {
-  background: #121212 ;
+  background: #070d21 ;
 
 }
 *{
@@ -14,4 +14,21 @@ body,
   width:100%;
   overflow-x:hidden;
   font-family:sans-serif;
+}
+/* ---------- LIGHT THEME ---------- */
+
+body.light{
+  --background-color:#f8fafc;
+  --card-color:#ffffff;
+  --text-color:#111827;
+  --primary-color:#2563eb;
+}
+
+/* ---------- DARK THEME ---------- */
+
+body.dark{
+  --background-color:#070d21;
+  --card-color:#0b1638;
+  --text-color:#ffffff;
+  --primary-color:#1e3a8a;
 }

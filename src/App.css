@@ -7,7 +7,7 @@
 body{
   font-family: Arial, sans-serif;
 
-  background: #121212;
+  background: #070d21;
   color: white;
 
   overflow-x: hidden;
@@ -27,7 +27,7 @@ body{
 }
 
 .dark-theme{
-  background: #121212;
+  background: #070d21;
   color: white;
 }
 
@@ -36,9 +36,9 @@ body{
   color: black;
 }
 
-/* ORANGE GLOW */
+/* #2563eb GLOW */
 
-.orange-glow{
+.glow{
   position: fixed;
 
   top: -250px;
@@ -62,4 +62,21 @@ body{
   pointer-events: none;
 
   z-index: 0;
+}
+/* ---------- LIGHT THEME ---------- */
+
+body.light{
+  --background-color:#f8fafc;
+  --card-color:#ffffff;
+  --text-color:#111827;
+  --primary-color:#2563eb;
+}
+
+/* ---------- DARK THEME ---------- */
+
+body.dark{
+  --background-color:#070d21;
+  --card-color:#0b1638;
+  --text-color:#ffffff;
+  --primary-color:#1e3a8a;
 }

@@ -1,39 +1,62 @@
 .footer{
-  width: 100%;
-  background:#121212;
-  padding: 50px 30px;
-  margin-top: 60px;
-  color: white;
+  width:100%;
+  background:#070d21;
+  padding:30px 50px;
+  border-top:1px solid rgba(255,255,255,.1);
 }
 
-.footer h2{
-  color: #ff6a00;
-  font-size: 2rem;
-  margin-bottom: 10px;
+.footer-logo{
+  margin-bottom:15px;
 }
 
-.footer p{
-  color: #aaa;
-  margin-bottom: 25px;
+.footer-logo h2{
+  color:#1e3a8a;
+  font-size:2rem;
+  font-weight:700;
+}
+
+.footer-content{
+  display:flex;
+  align-items:center;
+  gap:115px;
+  flex-wrap:wrap;
+}
+
+.footer-content p{
+  color:#bdbdbd;
+  margin:0;
 }
 
 .footer-links{
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
-
-  margin-bottom: 30px; /* links aur niche text ke bich gap */
+  display:flex;
+  gap:25px;
 }
 
 .footer-links a{
-  color: #ccc;
-  text-decoration: none;
+  color:white;
+  text-decoration:none;
+  transition:.8s;
 }
 
 .footer-links a:hover{
-  color: #ff6a00;
+  color:#1e3a8a;
 }
 
-.footer-bottom{
-  margin-top: 20px; /* extra spacing */
+.footer-copy{
+  margin-left:auto;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+  .footer-content{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .footer-copy{
+    margin-left:0;
+  }
+
 }
