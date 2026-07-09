@@ -2,9 +2,9 @@ import "./Pages.css";
 
 function Contact() {
   return (
-    <div className="contact-page">
+    <div className="page-container">
 
-      <div className="contact-container">
+      <div className="page-card">
 
         <h1>Contact Us</h1>
 
@@ -16,13 +16,21 @@ function Contact() {
 
           <h2>Developer Information</h2>
 
-          <p><strong>Name:</strong> Preeti Desale</p>
+          <p>
+            <strong>Name:</strong> Preeti Desale
+          </p>
 
-          <p><strong>Email:</strong> desalepreeti93@gmail.com</p>
+          <p>
+            <strong>Email:</strong> desalepreeti93@gmail.com
+          </p>
 
-          <p><strong>Phone:</strong> +91 9309344687</p>
+          <p>
+            <strong>Phone:</strong> +91 9309344687
+          </p>
 
-          <p><strong>Location:</strong>Nashik, Maharashtra, India</p>
+          <p>
+            <strong>Location:</strong> Nashik, Maharashtra, India
+          </p>
 
         </div>
 

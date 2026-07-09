@@ -22,10 +22,10 @@ function Cart() {
 
   return (
     <div className="cart-page">
-      <h1 className="cart-title">Shopping Cart 🛍️</h1>
+      <h2 className="cart-title">Shopping Cart 🛍️</h2>
 
       {cartItems.length === 0 ? (
-        <h2 className="empty-cart">🛒 Your Cart Is Empty</h2>
+        <h3 className="empty-cart">🛒 Your Cart Is Empty</h3>
       ) : (
         <div className="cart-container">
 

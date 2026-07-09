@@ -35,7 +35,7 @@
 
     margin-bottom:25px;
 
-    transition:.3s;
+    transition:.8s;
 }
 
 .cart-card:hover{
@@ -56,14 +56,14 @@
     flex:1;
 }
 
-.cart-details h2{
+.cart-details h3{
     font-size:2rem;
     margin-bottom:15px;
     color:var(--text-color);
 }
 
 .cart-price{
-    font-size:1.7rem;
+    font-size:1.5rem;
     color:#2563eb;
     font-weight:bold;
     margin-bottom:20px;
@@ -77,8 +77,8 @@
 }
 
 .quantity-controls button{
-    width:42px;
-    height:42px;
+    width:35px;
+    height:35px;
 
     border:none;
 
@@ -169,7 +169,7 @@
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.7s;
 }
 
 .clear-cart-btn{

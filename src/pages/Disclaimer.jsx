@@ -4,36 +4,40 @@ function Disclaimer() {
   return (
     <div className="page-container">
 
-      <h1>Disclaimer</h1>
+      <div className="page-card">
 
-      <p>
-        The information provided on ShopSphere is intended for general
-        informational purposes only.
-      </p>
+        <h1>Disclaimer</h1>
 
-      <h2>📌 Important Information</h2>
+        <p>
+          The information provided on ShopSphere is intended for general
+          informational purposes only.
+        </p>
 
-      <ul>
-        <li>✔ Product images are for reference only.</li>
-        <li>✔ Product specifications may change without notice.</li>
-        <li>✔ Prices and offers are subject to availability.</li>
-        <li>✔ We are not responsible for third-party websites linked from our platform.</li>
-      </ul>
+        <h2>📌 Important Information</h2>
 
-      <h2>⚠ Limitation of Liability</h2>
+        <ul>
+          <li>✔ Product images are for reference only.</li>
+          <li>✔ Product specifications may change without notice.</li>
+          <li>✔ Prices and offers are subject to availability.</li>
+          <li>✔ We are not responsible for third-party websites linked from our platform.</li>
+        </ul>
 
-      <ul>
-        <li>✔ ShopSphere is not liable for indirect or incidental damages.</li>
-        <li>✔ Users are responsible for maintaining account confidentiality.</li>
-        <li>✔ Continued use of the website indicates acceptance of our policies.</li>
-      </ul>
+        <h2>⚠ Limitation of Liability</h2>
 
-      <h2>📞 Contact</h2>
+        <ul>
+          <li>✔ ShopSphere is not liable for indirect or incidental damages.</li>
+          <li>✔ Users are responsible for maintaining account confidentiality.</li>
+          <li>✔ Continued use of the website indicates acceptance of our policies.</li>
+        </ul>
 
-      <p>
-        For any questions regarding this disclaimer, please contact our
-        customer support team.
-      </p>
+        <h2>📞 Contact</h2>
+
+        <p>
+          For any questions regarding this disclaimer, please contact our
+          customer support team.
+        </p>
+
+      </div>
 
     </div>
   );
