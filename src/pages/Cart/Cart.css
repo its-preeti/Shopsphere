@@ -2,14 +2,16 @@
     width:90%;
     max-width:1400px;
     margin:40px auto;
-    color:white;
-    min-height: 80vh;
+    min-height:80vh;
+
+    color:var(--text-color);
 }
 
 .cart-title{
     font-size:3rem;
     margin-bottom:30px;
     font-weight:700;
+    color:var(--text-color);
 }
 
 .cart-container{
@@ -24,14 +26,21 @@
     align-items:center;
     gap:30px;
 
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
+    background:var(--card-color);
+    border:1px solid var(--border-color);
 
     border-radius:18px;
 
     padding:22px;
 
     margin-bottom:25px;
+
+    transition:.3s;
+}
+
+.cart-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(37,99,235,.15);
 }
 
 .cart-image{
@@ -50,11 +59,12 @@
 .cart-details h2{
     font-size:2rem;
     margin-bottom:15px;
+    color:var(--text-color);
 }
 
 .cart-price{
     font-size:1.7rem;
-    color:#2723aa;
+    color:#2563eb;
     font-weight:bold;
     margin-bottom:20px;
 }
@@ -74,18 +84,25 @@
 
     border-radius:8px;
 
-    background:#2b2b2b;
+    background:#2563eb;
 
     color:white;
 
     font-size:20px;
 
     cursor:pointer;
+
+    transition:.3s;
+}
+
+.quantity-controls button:hover{
+    background:#1d4ed8;
 }
 
 .quantity-number{
     font-size:22px;
     font-weight:bold;
+    color:var(--text-color);
 }
 
 .remove-btn{
@@ -93,28 +110,30 @@
 
     background:transparent;
 
-    color:#b51a1a;
+    color:#ef4444;
 
-    border:1px solid #a8222f;
+    border:1px solid #ef4444;
 
     border-radius:8px;
 
     cursor:pointer;
+
+    transition:.3s;
 }
 
 .remove-btn:hover{
-    background:#791717;
+    background:#ef4444;
     color:white;
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 
 .cart-summary{
     width:360px;
 
-    background:rgba(255,255,255,0.05);
+    background:var(--card-color);
 
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid var(--border-color);
 
     border-radius:18px;
 
@@ -127,6 +146,7 @@
 .cart-summary h2{
     font-size:2.2rem;
     margin-bottom:25px;
+    color:var(--text-color);
 }
 
 .summary-buttons{
@@ -148,17 +168,27 @@
     font-size:17px;
 
     cursor:pointer;
+
+    transition:.3s;
 }
 
 .clear-cart-btn{
-    background:#2b2b2b;
+    background:#6b7280;
     color:white;
 }
 
+.clear-cart-btn:hover{
+    background:#4b5563;
+}
+
 .checkout-btn{
-    background:#281a90;
+    background:#2563eb;
     color:white;
     font-weight:600;
+}
+
+.checkout-btn:hover{
+    background:#1d4ed8;
 }
 
 /* MOBILE */

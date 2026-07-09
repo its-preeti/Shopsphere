@@ -1,82 +1,100 @@
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-  font-family: Arial, sans-serif;
+  font-family:Arial,sans-serif;
+  overflow-x:hidden;
 
-  background: #070d21;
-  color: white;
+  background:var(--background-color);
+  color:var(--text-color);
 
-  overflow-x: hidden;
+  transition:0.3s ease;
 }
 
-/* MAIN THEMES */
+/* DARK */
+
+body.dark{
+
+  --background-color:#070d21;
+
+  --card-color:#0b1638;
+
+  --text-color:#ffffff;
+
+  --navbar-color:#081229;
+
+  --footer-color:#081229;
+
+  --input-color:#14213d;
+
+  --border-color:#1e3a8a;
+
+  --button-color:#2563eb;
+
+  --button-hover:#1d4ed8;
+
+}
+
+/* LIGHT */
+
+body.light{
+
+  --background-color:#f5f7fb;
+
+  --card-color:#ffffff;
+
+  --text-color:#111827;
+
+  --navbar-color:#ffffff;
+
+  --footer-color:#ffffff;
+
+  --input-color:#f3f4f6;
+
+  --border-color:#d1d5db;
+
+  --button-color:#2563eb;
+
+  --button-hover:#1d4ed8;
+
+}
 
 .dark-theme,
 .light-theme{
-  position: relative;
 
-  min-height: 100vh;
+  min-height:100vh;
 
-  overflow: hidden;
+  background:var(--background-color);
 
-  z-index: 1;
+  color:var(--text-color);
+
 }
-
-.dark-theme{
-  background: #070d21;
-  color: white;
-}
-
-.light-theme{
-  background: white;
-  color: black;
-}
-
-/* #2563eb GLOW */
 
 .glow{
-  position: fixed;
 
-  top: -250px;
-  right: -250px;
+  position:fixed;
 
-  width: 700px;
-  height: 700px;
+  top:-250px;
 
-  border-radius: 50%;
+  right:-250px;
 
-  background:
-  radial-gradient(
-    circle,
-    rgba(255,102,0,0.30) 0%,
-    rgba(255,102,0,0.18) 30%,
-    transparent 70%
-  );
+  width:700px;
 
-  filter: blur(90px);
+  height:700px;
 
-  pointer-events: none;
+  border-radius:50%;
 
-  z-index: 0;
-}
-/* ---------- LIGHT THEME ---------- */
+  background:radial-gradient(circle,
+  rgba(37,99,235,.30),
+  transparent 70%);
 
-body.light{
-  --background-color:#f8fafc;
-  --card-color:#ffffff;
-  --text-color:#111827;
-  --primary-color:#2563eb;
-}
+  filter:blur(90px);
 
-/* ---------- DARK THEME ---------- */
+  pointer-events:none;
 
-body.dark{
-  --background-color:#070d21;
-  --card-color:#0b1638;
-  --text-color:#ffffff;
-  --primary-color:#1e3a8a;
+  z-index:0;
+
 }

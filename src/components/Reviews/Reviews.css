@@ -1,49 +1,93 @@
-.reviews {
-  margin-top: 50px;
+.reviews{
+  margin-top:50px;
 }
 
-.reviews h2 {
-  margin-bottom: 20px;
-  color: #1e3a8a;
+.reviews h2{
+  margin-bottom:20px;
+  color:#2563eb;
 }
 
-.reviews form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
+.reviews form{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-bottom:30px;
 }
 
 .reviews input,
 .reviews select,
-.reviews textarea {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.reviews textarea{
+
+  padding:12px;
+
+  border:1px solid var(--border-color);
+
+  border-radius:8px;
+
+  background:var(--card-color);
+
+  color:var(--text-color);
+
+  transition:.3s ease;
+
 }
 
-.reviews textarea {
-  resize: none;
-  height: 100px;
+.reviews input::placeholder,
+.reviews textarea::placeholder{
+  color:gray;
 }
 
-.reviews button {
-  padding: 12px;
-  border: none;
-  background: #1e3a8a;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
+.reviews textarea{
+  resize:none;
+  height:100px;
 }
 
-.review-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.reviews button{
+
+  padding:12px;
+
+  border:none;
+
+  background:var(--button-color);
+
+  color:white;
+
+  border-radius:8px;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+
 }
 
-.review-card {
-  background: #070d21;
-  padding: 15px;
-  border-radius: 10px;
+.reviews button:hover{
+
+  background:var(--button-hover);
+
+}
+
+.review-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:15px;
+
+}
+
+.review-card{
+
+  background:var(--card-color);
+
+  color:var(--text-color);
+
+  padding:15px;
+
+  border-radius:10px;
+
+  border:1px solid var(--border-color);
+
+  transition:.3s ease;
+
 }

@@ -1,116 +1,149 @@
 /* PRODUCT CARD */
 
-.product-card {
-  background: #070d21;
-  border-radius: 28px;
-  overflow: hidden;
+.product-card{
 
-  width: 320px;
+  background:var(--card-color);
 
-  border: 1px solid rgba(255,255,255,0.06);
+  border-radius:28px;
 
-  box-shadow:
-    0 0 30px rgba(255,106,0,0.12);
+  overflow:hidden;
 
-  transition: 0.8s ease;
+  width:320px;
 
-  display: flex;
-  flex-direction: column;
+  border:1px solid var(--border-color);
+
+  box-shadow:0 0 30px rgba(37,99,235,.12);
+
+  transition:.3s ease;
+
+  display:flex;
+
+  flex-direction:column;
+
 }
 
 /* HOVER */
 
-.product-card:hover {
-  transform: translateY(-5px);
+.product-card:hover{
+
+  transform:translateY(-5px);
+
 }
 
 /* IMAGE */
 
-.product-card img {
-  width: 100%;
-  height: 200px;
+.product-card img{
 
-  object-fit: cover;
+  width:100%;
 
-  display: block;
+  height:200px;
+
+  object-fit:cover;
+
+  display:block;
+
 }
 
 /* INFO */
 
-.product-info {
-  padding: 24px;
+.product-info{
+
+  padding:24px;
+
 }
 
-.product-info h3 {
-  font-size: 1.5rem;
+.product-info h3{
 
-  font-weight: 400;
+  font-size:1.5rem;
 
-  line-height: 1.1;
+  font-weight:400;
 
-  margin-bottom: 16px;
+  line-height:1.1;
 
-  color: white;
+  margin-bottom:16px;
+
+  color:var(--text-color);
+
 }
 
-.product-info p {
-  color: #1e3a8a;
+.product-info p{
 
-  font-size: 1.5rem;
+  color:#2563eb;
 
-  font-weight: bold;
+  font-size:1.5rem;
 
-  margin-bottom: 26px;
+  font-weight:bold;
+
+  margin-bottom:26px;
+
 }
 
 /* BUTTON */
 
-.product-info button {
-  width: 100%;
+.product-info button{
 
-  padding: 18px;
+  width:100%;
 
-  border: none;
+  padding:18px;
 
-  border-radius: 16px;
+  border:none;
 
-  background: #1e3a8a;
+  border-radius:16px;
 
-  color: white;
+  background:var(--button-color);
 
-  font-size: 1.3rem;
+  color:white;
 
-  font-weight: 400;
+  font-size:1.3rem;
 
-  cursor: pointer;
+  font-weight:400;
 
-  transition: 0.8s ease;
+  cursor:pointer;
+
+  transition:.3s;
+
 }
+
+.product-info button:hover{
+
+  background:var(--button-hover);
+
+}
+
 .product-card button{
-  padding: 20px 40px;
-  font-size: 1.1rem;
-   
 
-  width: auto; /* agar full width hai toh */
+  padding:20px 40px;
+
+  font-size:1.1rem;
+
+  width:auto;
+
 }
-.product-info button:hover {
-  background: #1e3a8a;
-}
+
 .products-grid{
+
   display:flex;
+
   gap:30px;
+
   flex-wrap:wrap;
+
 }
+
 /* MOBILE */
 
 @media(max-width:768px){
 
-  .product-card{
-    width: 100%;
-  }
+.product-card{
 
-  .product-card img{
-    height: 260px;
-  }
+width:100%;
+
+}
+
+.product-card img{
+
+height:260px;
+
+}
 
 }

@@ -19,10 +19,10 @@ const compareProducts = [
 
 function Compare() {
   return (
-    <div className="compare">
+    <div className="compare-page">
       <h1>⚖️ Product Comparison</h1>
 
-      <table>
+      <table className="compare-table">
         <thead>
           <tr>
             <th>Feature</th>
@@ -34,4 +34,25 @@ function Compare() {
         <tbody>
           <tr>
             <td>Price</td>
-            <td>
+            <td>₹{compareProducts[0].price}</td>
+            <td>₹{compareProducts[1].price}</td>
+          </tr>
+
+          <tr>
+            <td>Rating</td>
+            <td>⭐ {compareProducts[0].rating}</td>
+            <td>⭐ {compareProducts[1].rating}</td>
+          </tr>
+
+          <tr>
+            <td>Category</td>
+            <td>{compareProducts[0].category}</td>
+            <td>{compareProducts[1].category}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default Compare;

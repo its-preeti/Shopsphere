@@ -45,8 +45,7 @@ function App() {
       }
     >
             {/* #2563eb GLOW */}
-      <div className="#2563eb-glow"></div>
-
+      <div className="glow"></div>
 
       <Navbar />
 
