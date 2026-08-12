@@ -32,7 +32,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://shopsphere-drab.vercel.app/",
+      "https://shopsphere-drab.vercel.app",
     ],
     credentials: true,
   })
