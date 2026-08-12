@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { clearCart } from "../redux/cartSlice";
+import API from "../services/api";
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
@@ -41,28 +42,26 @@ const Checkout = () => {
     try {
       setLoading(true);
 
-      const orderRes = await fetch(
-        "http://localhost:5000/api/payment/order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: totalPrice,
-          }),
-        }
-      );
+      // =========================
+      // CREATE RAZORPAY ORDER
+      // =========================
 
-      const orderData = await orderRes.json();
+      const orderRes = await API.post("/payment/order", {
+        amount: totalPrice,
+      });
+
+      const orderData = orderRes.data;
+
       console.log("Payment Order:", orderData);
 
-      if (!orderRes.ok) {
-        alert(
-          orderData.message || "Payment could not be initialized."
-        );
+      if (!orderData) {
+        alert("Payment could not be initialized.");
         return;
       }
+
+      // =========================
+      // CHECK RAZORPAY
+      // =========================
 
       if (!window.Razorpay) {
         alert(
@@ -71,82 +70,125 @@ const Checkout = () => {
         return;
       }
 
+      // =========================
+      // RAZORPAY OPTIONS
+      // =========================
+
       const options = {
-        key: orderData.key || "rzp_test_T5XcZKRMPuHhZd",
+        key:
+          orderData.key ||
+          "rzp_test_T5XcZKRMPuHhZd",
+
         amount: orderData.amount,
-        currency: orderData.currency || "INR",
+
+        currency:
+          orderData.currency || "INR",
+
         name: "ShopSphere",
+
         description: "ShopSphere Order",
+
         order_id: orderData.id,
 
         handler: async (response) => {
           try {
-            console.log("Razorpay Response:", response);
-
-            const verifyRes = await fetch(
-              "http://localhost:5000/api/payment/verify",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(response),
-              }
+            console.log(
+              "Razorpay Response:",
+              response
             );
 
-            const verifyData = await verifyRes.json();
-            console.log("Payment Verification:", verifyData);
+            // =========================
+            // VERIFY PAYMENT
+            // =========================
 
-            if (!verifyRes.ok) {
+            const verifyRes = await API.post(
+              "/payment/verify",
+              response
+            );
+
+            const verifyData = verifyRes.data;
+
+            console.log(
+              "Payment Verification:",
+              verifyData
+            );
+
+            if (!verifyData) {
               alert(
-                verifyData.message || "Payment verification failed"
+                "Payment verification failed"
               );
               return;
             }
 
-            const saveOrderRes = await fetch(
-              "http://localhost:5000/api/orders",
+            // =========================
+            // SAVE ORDER
+            // =========================
+
+            const saveOrderRes = await API.post(
+              "/orders",
               {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${user.token}`,
-                },
-                body: JSON.stringify({
-                  items: cartItems.map((item) => ({
-                    productId: item.productId,
-                    qty: Number(item.qty),
-                    price: Number(item.price),
-                  })),
-                  totalAmount: totalPrice,
-                  address,
-                  paymentId: response.razorpay_payment_id,
-                }),
+                items: cartItems.map((item) => ({
+                  productId: item.productId,
+                  qty: Number(item.qty),
+                  price: Number(item.price),
+                })),
+
+                totalAmount: totalPrice,
+
+                address,
+
+                paymentId:
+                  response.razorpay_payment_id,
               }
             );
 
-            const savedOrder = await saveOrderRes.json();
-            console.log("Saved Order:", savedOrder);
+            const savedOrder =
+              saveOrderRes.data;
 
-            if (saveOrderRes.ok) {
+            console.log(
+              "Saved Order:",
+              savedOrder
+            );
+
+            // =========================
+            // SUCCESS
+            // =========================
+
+            if (saveOrderRes.status >= 200 && saveOrderRes.status < 300) {
               dispatch(clearCart());
-              alert("Payment Successful & Order Placed! 🎉");
+
+              alert(
+                "Payment Successful & Order Placed! 🎉"
+              );
+
               navigate("/ordersuccess");
             } else {
               alert(
-                savedOrder.message || "Order saving failed"
+                savedOrder?.message ||
+                  "Order saving failed"
               );
             }
           } catch (error) {
-            console.error("Payment Handler Error:", error);
-            alert("Something went wrong after payment.");
+            console.error(
+              "Payment Handler Error:",
+              error
+            );
+
+            alert(
+              error.response?.data?.message ||
+                "Something went wrong after payment."
+            );
           }
         },
 
         prefill: {
           name: address.fullName,
-          email: user.email,
-          contact: "9999999999",
+
+          email:
+            user?.email || "",
+
+          contact:
+            "9999999999",
         },
 
         theme: {
@@ -155,20 +197,39 @@ const Checkout = () => {
 
         modal: {
           ondismiss: () => {
-            console.log("Razorpay payment window closed");
+            console.log(
+              "Razorpay payment window closed"
+            );
           },
         },
       };
 
-      const razorpay = new window.Razorpay(options);
+      // =========================
+      // OPEN RAZORPAY
+      // =========================
+
+      const razorpay =
+        new window.Razorpay(options);
+
       razorpay.open();
     } catch (error) {
-      console.error("Payment Error:", error);
-      alert("Unable to start payment. Check backend.");
+      console.error(
+        "Payment Error:",
+        error
+      );
+
+      alert(
+        error.response?.data?.message ||
+          "Unable to start payment. Check backend."
+      );
     } finally {
       setLoading(false);
     }
   };
+
+  // =========================
+  // FORM SUBMIT
+  // =========================
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -184,9 +245,13 @@ const Checkout = () => {
 
   return (
     <div style={containerStyle}>
-      <h1 style={titleStyle}>Checkout</h1>
+      <h1 style={titleStyle}>
+        Checkout
+      </h1>
 
-      <h3 style={subtitleStyle}>Shipping Address</h3>
+      <h3 style={subtitleStyle}>
+        Shipping Address
+      </h3>
 
       <form onSubmit={handleSubmit}>
         <input
@@ -260,7 +325,8 @@ const Checkout = () => {
         />
 
         <h2 style={totalStyle}>
-          Total to Pay: ₹{totalPrice.toFixed(2)}
+          Total to Pay: ₹
+          {totalPrice.toFixed(2)}
         </h2>
 
         <button
@@ -271,10 +337,14 @@ const Checkout = () => {
             background: loading
               ? "var(--text-muted)"
               : "var(--primary)",
-            cursor: loading ? "not-allowed" : "pointer",
+            cursor: loading
+              ? "not-allowed"
+              : "pointer",
           }}
         >
-          {loading ? "Processing..." : "💳 Pay Now"}
+          {loading
+            ? "Processing..."
+            : "💳 Pay Now"}
         </button>
       </form>
     </div>
