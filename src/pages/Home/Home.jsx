@@ -1,72 +1,122 @@
-import "./Home.css";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
-function Home() {
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products");
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await res.json();
+
+        const latestProducts = [...data].reverse().slice(0, 4);
+        setProducts(latestProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products.filter((product) =>
+    String(product?.name || "")
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
 
   return (
-
-    <div className="home">
-
-      {/* HERO SECTION */}
-
-      <section className="hero">
-
-        <div className="hero-box">
+    <div>
+      <section className="hero-banner">
+        <div className="hero-content">
+          <span className="hero-label">
+            WELCOME TO SHOPSPHERE
+          </span>
 
           <h1>
-            Welcome to ShopSphere
+            Find something
+            <br />
+            <span>worth keeping.</span>
           </h1>
 
           <p>
-            Discover the latest products at the best prices.
+            Discover thoughtfully selected products designed to bring
+            style, comfort and quality into your everyday life.
           </p>
 
-          <div className="hero-buttons">
+          <div className="hero-actions">
+            <Link to="/shop" className="hero-btn primary">
+              Shop Now →
+            </Link>
 
-            <button
-              className="shop-btn"
-              onClick={() => navigate("/products")}
-            >
-              Shop Now
-            </button>
+            <Link to="/shop" className="hero-btn secondary">
+              Explore Collection ↗
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            <button
-              className="explore-btn"
-              onClick={() => navigate("/products")}
-            >
-              Explore
-            </button>
+      <section className="featured-section">
+        <h2 className="all-products-title">
+          All Products
+        </h2>
 
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-bar"
+        />
+
+        <div className="section-heading">
+          <div>
+            <span className="section-label">
+              OUR PICKS
+            </span>
+
+            <h2>
+              Featured Products
+            </h2>
           </div>
 
+          <Link to="/shop" className="view-all">
+            View all →
+          </Link>
         </div>
 
+        {loading ? (
+          <div className="loading">
+            Loading products...
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="loading">
+            No products found.
+          </div>
+        ) : (
+          <div className="product-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+              />
+            ))}
+          </div>
+        )}
       </section>
-
-      {/* CATEGORIES */}
-
-      <section className="categories">
-
-        <h2>Categories</h2>
-
-        <div className="categories-container">
-
-          <div className="category-card">Electronics</div>
-
-          <div className="category-card">Fashion</div>
-
-          <div className="category-card">Shoes</div>
-
-          <div className="category-card">Watches</div>
-
-        </div>
-
-      </section>
-
     </div>
   );
-}
+};
 
 export default Home;

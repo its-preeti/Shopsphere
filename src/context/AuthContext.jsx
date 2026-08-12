@@ -1,72 +1,38 @@
-import {
+import React, {
   createContext,
-  useContext,
   useState,
-  useEffect,
+  useContext,
 } from "react";
 
-export const AuthContext =
-  createContext();
+export const AuthContext = createContext();
 
-function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(
+    localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null
+  );
 
-  const [user, setUser] =
-    useState(null);
-
-  // LOAD USER
-  useEffect(() => {
-
-    const savedUser =
-      localStorage.getItem("user");
-
-    if (savedUser) {
-
-      setUser(
-        JSON.parse(savedUser)
-      );
-    }
-
-  }, []);
-
-  // LOGIN
   const login = (userData) => {
-
     setUser(userData);
-
-    localStorage.setItem(
-      "user",
-      JSON.stringify(userData)
-    );
+    localStorage.setItem("userInfo", JSON.stringify(userData));
   };
 
-  // LOGOUT
   const logout = () => {
-
     setUser(null);
-
-    localStorage.removeItem(
-      "user"
-    );
+    localStorage.removeItem("userInfo");
   };
 
   return (
-
     <AuthContext.Provider
-      value={{
-        user,
-        login,
-        logout,
-      }}
+      value={{ user, login, logout }}
     >
-
       {children}
-
     </AuthContext.Provider>
   );
-}
+};
 
-// CUSTOM HOOK
-export const useAuth = () =>
-  useContext(AuthContext);
-
-export default AuthProvider;
+// ✅ Custom Hook
+export const useAuth = () => {
+  return useContext(AuthContext);
+};

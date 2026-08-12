@@ -1,72 +1,104 @@
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  removeFromWishlist,
+  addToWishlist,
+} from "../../redux/wishlistSlice";
 import "./Wishlist.css";
-import { useContext } from "react";
-import { WishlistContext } from "../../context/WishlistContext";
 
-function Wishlist() {
+const Wishlist = () => {
+  const dispatch = useDispatch();
 
-  const {
-    wishlistItems,
-    removeFromWishlist,
-  } = useContext(WishlistContext);
+  const wishlistItems = useSelector(
+    (state) => state.wishlist.wishlistItems
+  );
+
+  const handleRemove = (productId) => {
+    dispatch(removeFromWishlist(productId));
+  };
+
+  const handleAddToCart = (item) => {
+    // Optional: cart me add karne ke liye
+    alert(`${item.name} added to cart!`);
+  };
 
   return (
-
     <div className="wishlist-page">
-
       <div className="wishlist-container">
 
-        <h1 className="wishlist-title">
-          My Wishlist ❤️
-        </h1>
- <br />
+        
 
         {wishlistItems.length === 0 ? (
+          <div className="empty-wishlist">
+            <h2>No Products In Wishlist ❤️</h2>
 
-          <h2 className="empty-wishlist">
-            No Products In Wishlist
-          </h2>
+            <p>
+              You haven't added any products to your wishlist yet.
+            </p>
 
+            <Link to="/shop" className="btn">
+              Continue Shopping →
+            </Link>
+          </div>
         ) : (
+          <div className="wishlist-list">
 
-          wishlistItems.map((item) => (
+            {wishlistItems.map((item) => (
+              <div
+                className="wishlist-item"
+                key={item.productId}
+              >
 
-            <div
-              className="wishlist-item"
-              key={item.id}
-            >
+                <Link to={`/product/${item.productId}`}>
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="wishlist-image"
+                  />
+                </Link>
 
-              <img
-                src={item.image}
-                alt={item.title}
-              />
+                <div className="wishlist-info">
 
-              <div>
+                  <Link to={`/product/${item.productId}`}>
+                    <h3>{item.name}</h3>
+                  </Link>
 
-                <h3>{item.title}</h3>
+                  <p className="wishlist-price">
+                    ₹{Number(item.price).toFixed(2)}
+                  </p>
 
-                <p>₹{item.price}</p>
+                  <div className="wishlist-actions">
 
-                <button
-                  onClick={() =>
-                    removeFromWishlist(item.id)
-                  }
-                >
-                  Remove
-                </button>
+                    <button
+                      className="btn"
+                      onClick={() => handleAddToCart(item)}
+                    >
+                      🛒 Add to Cart
+                    </button>
+
+                    <button
+                      className="remove-btn"
+                      onClick={() =>
+                        handleRemove(item.productId)
+                      }
+                    >
+                      Remove
+                    </button>
+
+                  </div>
+
+                </div>
 
               </div>
+            ))}
 
-            </div>
-
-          ))
-
+          </div>
         )}
 
       </div>
-
     </div>
-
   );
-}
+};
 
 export default Wishlist;

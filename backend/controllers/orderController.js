@@ -1,143 +1,75 @@
-const Order =
-require("../models/Order");
+const Order = require('../models/Order');
+const sendEmail = require('../utils/sendEmail');
 
-const Cart =
-require("../models/Cart");
+const addOrderItems = async (req, res) => {
+  try {
+    const { items, totalAmount, address, paymentId } = req.body;
+    if (items && items.length === 0) {
+      return res.status(400).json({ message: 'No order items' });
+    } else {
+      const order = new Order({
+        userId: req.user._id,
+        items,
+        totalAmount,
+        address,
+        paymentId
+      });
+      const createdOrder = await order.save();
 
-// ======================
-// CREATE ORDER
-// ======================
+      // Send Order Confirmation Email
+      const message = `
+        <h2>Order Confirmation</h2>
+        <p>Hello ${req.user.name},</p>
+        <p>Your order has been successfully placed! Order ID: <strong>${createdOrder._id}</strong></p>
+        <p>Total Amount Paid: $${totalAmount.toFixed(2)}</p>
+        <p>It will be shipped to: ${address.street}, ${address.city}</p>
+        <p>Thank you for shopping with ShopNest!</p>
+      `;
 
-const createOrder =
-async (req, res) => {
+      await sendEmail({
+        email: req.user.email,
+        subject: 'ShopNest - Order Confirmation',
+        message
+      });
 
-try {
-
-const cartItems =
-await Cart.find({
-
-user:
-req.user.id,
-
-}).populate("product");
-
-if (
-cartItems.length === 0
-) {
-
-return res.status(400).json({
-
-message:
-"Cart Is Empty",
-
-});
-
-}
-
-const totalPrice =
-cartItems.reduce(
-
-(total, item) =>
-
-total +
-item.product.price *
-item.quantity,
-
-0
-);
-
-const order =
-await Order.create({
-
-user:
-req.user.id,
-
-products:
-cartItems.map((item) => ({
-
-product:
-item.product._id,
-
-quantity:
-item.quantity,
-
-})),
-
-totalPrice,
-
-});
-
-// CLEAR CART
-
-await Cart.deleteMany({
-
-user:
-req.user.id,
-
-});
-
-res.status(201).json({
-
-message:
-"Order Placed ✅",
-
-order,
-
-});
-
-} catch (error) {
-
-res.status(500).json({
-
-message:
-error.message,
-
-});
-
-}
-
+      res.status(201).json(createdOrder);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-// ======================
-// GET MY ORDERS
-// ======================
-
-const getMyOrders =
-async (req, res) => {
-
-try {
-
-const orders =
-await Order.find({
-
-user:
-req.user.id,
-
-}).populate(
-"products.product"
-);
-
-res.status(200).json(
-orders
-);
-
-} catch (error) {
-
-res.status(500).json({
-
-message:
-error.message,
-
-});
-
-}
-
+const getMyOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ userId: req.user._id });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-module.exports = {
-
-createOrder,
-
-getMyOrders,
-
+const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({}).populate('userId', 'id name');
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
+
+const updateOrderStatus = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.status = req.body.status || order.status;
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404).json({ message: 'Order not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { addOrderItems, getMyOrders, getOrders, updateOrderStatus };

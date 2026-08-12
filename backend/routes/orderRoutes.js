@@ -1,37 +1,12 @@
-const express =
-require("express");
+const express = require('express');
+const { addOrderItems, getMyOrders, getOrders, updateOrderStatus } = require('../controllers/orderController');
+const { protect } = require('../middleware/authMiddleware');
+const { admin } = require('../middleware/adminMiddleware');
 
-const router =
-express.Router();
+const router = express.Router();
 
-const {
-createOrder,
-getMyOrders,
-} = require(
-"../controllers/orderController"
-);
+router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders);
+router.route('/myorders').get(protect, getMyOrders);
+router.route('/:id/status').put(protect, admin, updateOrderStatus);
 
-const {
-protect,
-} = require(
-"../middleware/authMiddleware"
-);
-
-// CREATE ORDER
-
-router.post(
-"/create",
-protect,
-createOrder
-);
-
-// GET MY ORDERS
-
-router.get(
-"/myorders",
-protect,
-getMyOrders
-);
-
-module.exports =
-router;
+module.exports = router;

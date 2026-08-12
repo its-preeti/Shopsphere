@@ -1,18 +1,111 @@
-# React + Vite
+# 🛍️ ShopSphere
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Modern MERN Stack E-Commerce Platform
 
-Currently, two official plugins are available:
+ShopSphere is a modern, full-stack e-commerce web application built with the **MERN stack**. It provides a complete shopping experience with secure authentication, product management, wishlist, cart, online payments, order management, and an admin dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### 🛒 Customer Features
 
-Note: This will impact Vite dev & build performances.
+- 🔐 User Registration & Login
+- 🔑 JWT-based Authentication
+- 🛍️ Browse Products
+- 🔎 Product Search & Filtering
+- 📦 Product Details
+- 🛒 Add to Cart
+- ❤️ Wishlist Management
+- ⭐ Product Reviews
+- 👀 Recently Viewed Products
+- 💳 Razorpay Online Payment
+- 📍 Shipping Address Management
+- 📋 Order Placement
+- 📦 Order History
+- 🎨 Light & Dark Theme
 
-## Expanding the ESLint configuration
+### 👨‍💼 Admin Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📊 Admin Dashboard
+- 📦 Product Management
+- ➕ Add Products
+- ✏️ Edit Products
+- 🗑️ Delete Products
+- 👥 User Directory
+- 📋 Order Management
+- 🚚 Update Order Status
+- 📈 Store Analytics
+- 🔐 Protected Admin Routes
+
+---
+
+## 🧑‍💻 Tech Stack
+
+### Frontend
+
+| Technology    | Purpose                |
+| ------------- | ---------------------- |
+| React.js      | UI Development         |
+| Vite          | Frontend Build Tool    |
+| JavaScript    | Application Logic      |
+| React Router  | Client-side Routing    |
+| Redux Toolkit | Cart & Wishlist State  |
+| Context API   | Authentication & Theme |
+| CSS           | Styling                |
+| React Icons   | UI Icons               |
+
+### Backend
+
+| Technology | Purpose                     |
+| ---------- | --------------------------- |
+| Node.js    | Runtime Environment         |
+| Express.js | REST API                    |
+| MongoDB    | Database                    |
+| Mongoose   | MongoDB ODM                 |
+| JWT        | Authentication              |
+| bcrypt     | Password Security           |
+| REST API   | Client-Server Communication |
+
+### Integrations & Tools
+
+- 💳 Razorpay
+- ☁️ Cloudinary
+- 📧 Nodemailer
+- 🧪 Postman
+- 🔧 Git & GitHub
+- 💻 VS Code
+- 🚀 Vercel
+
+---
+
+## 🏗️ Project Structure
+
+```text
+ShopSphere/
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── context/
+│   │   ├── redux/
+│   │   ├── styles/
+│   │   └── App.jsx
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── server.js
+│   └── package.json
+│
+├── .gitignore
+└── README.md
+```

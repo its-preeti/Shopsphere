@@ -1,127 +1,108 @@
-import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
-
-import {
-  FiMenu,
-  FiX,
-  FiHome,
-  FiShoppingBag,
-  FiShoppingCart,
-  FiHeart,
-  FiUser,
-  FiBarChart2,
-  FiPackage,
-} from "react-icons/fi";
-
-import { CartContext } from "../../context/CartContext";
-import { WishlistContext } from "../../context/WishlistContext";
-
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import "../../styles/navbar.css";
 
-function Navbar() {
-  const { cartItems } = useContext(CartContext);
-  const { wishlistItems } = useContext(WishlistContext);
+const Navbar = () => {
+  const { user, logout } = useAuth();
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  const cartItems = useSelector(
+    (state) => state.cart.cartItems
+  );
+
+  const wishlistItems = useSelector(
+    (state) => state.wishlist.wishlistItems
+  );
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth");
+  };
 
   return (
-    <>
-      <nav className="navbar">
+    <nav className="navbar">
 
-        {/* Logo */}
-        <div className="logo">
+      {/* Logo */}
+      <div className="navbar-brand">
+        <Link to="/">
           <img
-            src="https://cdn-icons-png.flaticon.com/128/10856/10856545.png"
-            alt="logo"
-          />
+  src="https://i.pinimg.com/1200x/c8/5c/4c/c85c4cc81847cc51ff6e21ad0f71eb0d.jpg"
+  alt="ShopSphere"
+  className="navbar-logo"
+/>
 
-          <h1>
-            <span>ShopSphere</span>
-          </h1>
+          <span className="brand-name">
+            ShopSphere
+          </span>
+        </Link>
+      </div>
 
-          <div className="dot"></div>
-        </div>
+      {/* Navigation */}
+      <ul className="navbar-links">
 
-        {/* NAV LINKS */}
+        <li>
+          <Link to="/shop">Shop</Link>
+        </li>
 
-        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <li>
+          <Link to="/cart">
+            Cart{" "}
+            <span className="nav-count">
+              {cartItems.length}
+            </span>
+          </Link>
+        </li>
 
+        <li>
+          <Link to="/wishlist">
+            Wishlist{" "}
+            <span className="nav-count">
+              {wishlistItems.length}
+            </span>
+          </Link>
+        </li>
+
+        {user ? (
+          <>
+            <li>
+              <Link to="/profile" className="user-link">
+                Hi, {user.name}
+              </Link>
+            </li>
+
+            {user.role === "admin" && (
+              <li>
+                <Link to="/admin">Admin</Link>
+              </li>
+            )}
+
+            <li>
+              <button
+                onClick={handleLogout}
+                className="btn-logout"
+              >
+                Logout
+              </button>
+            </li>
+          </>
+        ) : (
           <li>
-            <Link to="/" onClick={() => setMenuOpen(false)}>
-              <FiHome />
-              Home
-            </Link>
+            <Link to="/login">Login</Link>
           </li>
+        )}
 
-          <li>
-            <Link to="/products" onClick={() => setMenuOpen(false)}>
-              <FiShoppingBag />
-              Products
-            </Link>
-          </li>
+        {/* Theme Toggle */}
+        <li>
+          <ThemeToggle />
+        </li>
 
-          <li>
-            <Link to="/cart" onClick={() => setMenuOpen(false)}>
-              <FiShoppingCart />
-              Cart
-              <span className="badge">{cartItems.length}</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
-              <FiHeart />
-              Wishlist
-              <span className="badge">{wishlistItems.length}</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/analytics" onClick={() => setMenuOpen(false)}>
-              <FiBarChart2 />
-              Admin
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/orders" onClick={() => setMenuOpen(false)}>
-              <FiPackage />
-              Orders
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              to="/auth"
-              className="login-btn"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FiUser />
-              Account
-            </Link>
-          </li>
-
-          <li>
-            <ThemeToggle />
-          </li>
-
-        </ul>
-
-        {/* MOBILE MENU */}
-
-        <div
-          className="menu-icon"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FiX /> : <FiMenu />}
-        </div>
-
-      </nav>
-
-      
-    </>
+      </ul>
+    </nav>
   );
-}
+};
 
 export default Navbar;

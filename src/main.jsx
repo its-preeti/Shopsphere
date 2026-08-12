@@ -1,41 +1,22 @@
-
 import React from "react";
-
 import ReactDOM from "react-dom/client";
+import { Provider } from 'react-redux';
+import "./styles/global.css";
 
-import { BrowserRouter }
-from "react-router-dom";
-
+import { BrowserRouter }from "react-router-dom";
 import App from "./App.jsx";
+import store from "./redux/store";
+import {ThemeProvider,} from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
+ReactDOM.createRoot(document.getElementById("root")).render(
 
-import "./index.css";
-
-import {
-ThemeProvider,
-} from "./context/ThemeContext";
-
-import CartProvider
-from "./context/CartContext";
-
-import WishlistProvider
-from "./context/WishlistContext";
-
-import AuthProvider
-from "./context/AuthContext";
-
-ReactDOM.createRoot(
-document.getElementById("root")
-).render(
 
 <React.StrictMode>
+<Provider store={store}>
 
 <BrowserRouter>
 
 <ThemeProvider>
-
-<CartProvider>
-
-<WishlistProvider>
 
 <AuthProvider>
 
@@ -43,13 +24,10 @@ document.getElementById("root")
 
 </AuthProvider>
 
-</WishlistProvider>
-
-</CartProvider>
-
 </ThemeProvider>
 
 </BrowserRouter>
+  </Provider>
 
 </React.StrictMode>
 

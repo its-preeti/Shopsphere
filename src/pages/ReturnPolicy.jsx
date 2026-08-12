@@ -1,48 +1,57 @@
+import React from "react";
 import "./Pages.css";
 
-function ReturnPolicy() {
+const ReturnPolicy = () => {
   return (
     <div className="page-container">
-
       <div className="page-card">
+        <div className="page-header">
+          <span className="page-label">SHOPSPHERE POLICY</span>
+          <h1>Return Policy</h1>
+          <p>
+            Your satisfaction is our priority. Please read our return and
+            refund policy carefully before requesting a return.
+          </p>
+        </div>
 
-        <h1>Return Policy</h1>
+        <div className="policy-section">
+          <h2>📦 Return Eligibility</h2>
+          <ul>
+            <li>Return request must be submitted within 7 days of delivery.</li>
+            <li>Product must be unused and in its original packaging.</li>
+            <li>Invoice or order confirmation must be available.</li>
+            <li>All accessories, manuals and original items must be included.</li>
+          </ul>
+        </div>
 
-        <p>
-          Your satisfaction is our highest priority. If you are not completely
-          satisfied with your purchase, you may request a return under the
-          following conditions.
-        </p>
+        <div className="policy-section">
+          <h2>💰 Refund Process</h2>
+          <ul>
+            <li>Returned product will be inspected within 2–3 business days.</li>
+            <li>Approved refunds are processed within 5–7 business days.</li>
+            <li>Refund will be sent to the original payment method.</li>
+          </ul>
+        </div>
 
-        <h2>📦 Return Eligibility</h2>
+        <div className="policy-section">
+          <h2>❌ Non-Returnable Items</h2>
+          <ul>
+            <li>Opened personal care products.</li>
+            <li>Gift cards and digital products.</li>
+            <li>Products damaged because of customer misuse.</li>
+            <li>Products without original packaging or accessories.</li>
+          </ul>
+        </div>
 
-        <ul>
-          <li>✔ Return request within 7 days of delivery.</li>
-          <li>✔ Product must be unused and in original packaging.</li>
-          <li>✔ Invoice or order confirmation is required.</li>
-          <li>✔ Accessories and manuals should be included.</li>
-        </ul>
-
-        <h2>💰 Refund Process</h2>
-
-        <ul>
-          <li>✔ Product inspection within 2–3 business days.</li>
-          <li>✔ Refund processed within 5–7 business days.</li>
-          <li>✔ Refund credited to the original payment method.</li>
-        </ul>
-
-        <h2>❌ Non-Returnable Items</h2>
-
-        <ul>
-          <li>Opened personal care products.</li>
-          <li>Gift cards.</li>
-          <li>Products damaged by customer misuse.</li>
-        </ul>
-
+        <div className="policy-note">
+          <strong>Need help with a return?</strong>
+          <p>
+            Contact our support team with your order ID and reason for return.
+          </p>
+        </div>
       </div>
-
     </div>
   );
-}
+};
 
 export default ReturnPolicy;
