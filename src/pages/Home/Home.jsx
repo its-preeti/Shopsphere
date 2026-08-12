@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import API from "../../services/api";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -10,18 +11,16 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/products");
+        const response = await API.get("/api/products");
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
+        const data = response.data;
 
         const latestProducts = [...data].reverse().slice(0, 4);
+
         setProducts(latestProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
+        setProducts([]);
       } finally {
         setLoading(false);
       }

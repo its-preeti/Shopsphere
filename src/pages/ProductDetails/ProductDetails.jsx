@@ -6,6 +6,7 @@ import { addToCart } from "../../redux/cartSlice";
 import { addToWishlist } from "../../redux/wishlistSlice";
 
 import Reviews from "../../components/Reviews/Reviews";
+import API from "../../services/api";
 import "../../styles/product.css";
 
 const ProductDetail = () => {
@@ -19,19 +20,11 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:5000/api/products/${id}`
-        );
+        const response = await API.get(`/api/products/${id}`);
 
-        if (!res.ok) {
-          throw new Error("Product not found");
-        }
+        console.log("Product Details:", response.data);
 
-        const data = await res.json();
-
-        console.log("Product Details:", data);
-
-        setProduct(data);
+        setProduct(response.data);
       } catch (error) {
         console.error("Product fetch error:", error);
         setProduct(null);
@@ -43,7 +36,6 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  // ADD TO CART
   const handleAddToCart = () => {
     if (!product) return;
 
@@ -60,7 +52,6 @@ const ProductDetail = () => {
     alert("Successfully added to your cart! 🛒");
   };
 
-  // ADD TO WISHLIST
   const handleAddToWishlist = () => {
     if (!product) return;
 
@@ -76,7 +67,6 @@ const ProductDetail = () => {
     alert("❤️ Successfully added to Wishlist!");
   };
 
-  // LOADING
   if (loading) {
     return (
       <div
@@ -91,7 +81,6 @@ const ProductDetail = () => {
     );
   }
 
-  // PRODUCT NOT FOUND
   if (!product) {
     return (
       <div
@@ -115,7 +104,6 @@ const ProductDetail = () => {
         padding: "20px",
       }}
     >
-      {/* BREADCRUMB */}
       <div
         style={{
           color: "var(--text-soft)",
@@ -136,10 +124,7 @@ const ProductDetail = () => {
         </span>
       </div>
 
-      {/* PRODUCT DETAIL */}
       <div className="product-detail">
-
-        {/* LEFT - IMAGE */}
         <div className="detail-image-container">
           <img
             src={product.imageUrl}
@@ -152,9 +137,7 @@ const ProductDetail = () => {
           />
         </div>
 
-        {/* RIGHT - INFO */}
         <div className="detail-info">
-
           <h2
             style={{
               fontSize: "2.8rem",
@@ -175,7 +158,6 @@ const ProductDetail = () => {
             ₹{Number(product.price).toFixed(2)}
           </p>
 
-          {/* DESCRIPTION */}
           <div style={{ marginBottom: "25px" }}>
             <h4
               style={{
@@ -196,7 +178,6 @@ const ProductDetail = () => {
             </p>
           </div>
 
-          {/* CATEGORY */}
           <p
             style={{
               color: "var(--text-soft)",
@@ -209,18 +190,16 @@ const ProductDetail = () => {
             </strong>
           </p>
 
-          {/* RATING */}
           <p
             style={{
               color: "#f59e0b",
               marginBottom: "20px",
             }}
           >
-            ⭐ {product.ratings || 0} / 5{" "}
-            ({product.numReviews || 0} reviews)
+            ⭐ {product.ratings || 0} / 5 (
+            {product.numReviews || 0} reviews)
           </p>
 
-          {/* BUTTONS */}
           <div
             style={{
               display: "flex",
@@ -232,7 +211,7 @@ const ProductDetail = () => {
               onClick={handleAddToCart}
               className="btn"
               style={{
-                flexGrow: "1",
+                flexGrow: 1,
                 padding: "18px",
                 fontSize: "1.2rem",
               }}
@@ -254,7 +233,6 @@ const ProductDetail = () => {
             </button>
           </div>
 
-          {/* STOCK */}
           <p
             style={{
               marginTop: "20px",
@@ -269,11 +247,9 @@ const ProductDetail = () => {
               ? `● In Stock (${product.stock} units available)`
               : "● Temporarily Out of Stock"}
           </p>
-
         </div>
       </div>
 
-      {/* REVIEWS */}
       <div style={{ marginTop: "50px" }}>
         <Reviews productId={product._id} />
       </div>
