@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import API from "../services/api";
 import "../styles/auth.css";
 
 const Register = () => {
@@ -15,37 +16,35 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://shopsphere-p1l8.onrender.com/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
+      const res = await API.post("/api/auth/register", {
+        name,
+        email,
+        password,
       });
 
-      const data = await res.json();
+      const data = res.data;
 
-      if (res.ok) {
-        alert("Registration Successful!");
+      console.log("REGISTER RESPONSE:", data);
 
-        login(data);
+      alert("Registration Successful!");
 
-        // Admin hai to Admin Panel par bhejo
-        if (data.role === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
+      login(data);
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+
+      // Admin hai to Admin Panel par bhejo
+      if (data.role === "admin") {
+        navigate("/admin");
       } else {
-        alert(data.message || "Registration failed");
+        navigate("/");
       }
     } catch (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
+      console.error("REGISTER ERROR:", error);
+
+      const message =
+        error.response?.data?.message || "Registration failed";
+
+      alert(message);
     }
   };
 

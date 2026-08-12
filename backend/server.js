@@ -33,8 +33,9 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://shopsphere-drab.vercel.app",
+      "https://shopsphere-6u1cg1wsc-its-preetis-projects.vercel.app"
     ],
-    credentials: true,
+    credentials: true
   })
 );
 

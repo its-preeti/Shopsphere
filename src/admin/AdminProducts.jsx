@@ -12,7 +12,12 @@ const AdminProducts = () => {
 
     const fetchProducts = async () => {
       try {
-        const res = await API.get("/api/products");
+        const res = await API.get("/products", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+
         const data = res.data;
 
         console.log("PRODUCTS RESPONSE:", data);
@@ -20,6 +25,7 @@ const AdminProducts = () => {
         setProducts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching products:", error);
+        console.error("API ERROR:", error.response?.data);
         setProducts([]);
       }
     };
@@ -35,7 +41,11 @@ const AdminProducts = () => {
 
     if (window.confirm("Are you strictly sure you want to delete this?")) {
       try {
-        await API.delete(`/api/products/${id}`);
+        await API.delete(`/products/${id}`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
 
         setProducts((prev) =>
           prev.filter((p) => p._id !== id)
@@ -52,6 +62,7 @@ const AdminProducts = () => {
   return (
     <div style={containerStyle}>
       {/* HEADER */}
+
       <div style={headerStyle}>
         <h2 style={titleStyle}>Manage Products</h2>
 
@@ -61,6 +72,7 @@ const AdminProducts = () => {
       </div>
 
       {/* TABLE */}
+
       <div style={{ overflowX: "auto" }}>
         <table style={tableStyle}>
           <thead>
@@ -92,7 +104,9 @@ const AdminProducts = () => {
               products.map((product) => (
                 <tr key={product._id} style={rowStyle}>
                   <td style={tdStyle}>
-                    {product._id.substring(0, 8)}...
+                    {product._id
+                      ? `${product._id.substring(0, 8)}...`
+                      : "-"}
                   </td>
 
                   <td style={tdStyle}>
@@ -102,7 +116,7 @@ const AdminProducts = () => {
                   </td>
 
                   <td style={priceStyle}>
-                    ₹{Number(product.price).toFixed(2)}
+                    ₹{Number(product.price || 0).toFixed(2)}
                   </td>
 
                   <td style={tdStyle}>

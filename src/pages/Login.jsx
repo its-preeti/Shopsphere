@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import API from "../services/api";
 import "../styles/auth.css";
 
 const Login = () => {
@@ -18,23 +19,14 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const res = await fetch("https://shopsphere-p1l8.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+      const res = await API.post("/api/auth/login", {
+        email,
+        password,
       });
 
-      const data = await res.json();
+      const data = res.data;
 
-      if (!res.ok) {
-        alert(data.message || "Login failed");
-        return;
-      }
+      console.log("LOGIN RESPONSE:", data);
 
       // AuthContext me user save karo
       login(data);
@@ -49,8 +41,12 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
+      console.error("LOGIN ERROR:", error);
+
+      const message =
+        error.response?.data?.message || "Login failed";
+
+      alert(message);
     } finally {
       setLoading(false);
     }
