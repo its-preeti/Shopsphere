@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://shopsphere-backend-nl6r.onrender.com/api/auth",
+  baseURL: "https://shopsphere-p1l8.onrender.com/api/auth",
 });
 
 // REGISTER

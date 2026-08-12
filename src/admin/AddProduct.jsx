@@ -39,7 +39,7 @@ const AddProduct = () => {
     data.append('image', image);
 
     try {
-      const res = await fetch('/api/products', {
+      const res = await fetch('https://shopsphere-p1l8.onrender.com/api/products', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${user.token}`

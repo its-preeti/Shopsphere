@@ -16,7 +16,7 @@ const AdminOrders = () => {
       try {
         setLoading(true);
 
-        const res = await fetch("http://localhost:5000/api/orders", {
+        const res = await fetch("https://shopsphere-p1l8.onrender.com/api/orders", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -53,7 +53,7 @@ const AdminOrders = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}/status`,
+       `https://shopsphere-p1l8.onrender.com/api/orders/${id}/status`,
         {
           method: "PUT",
           headers: {

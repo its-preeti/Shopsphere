@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import API from "../services/api";
 
 const AdminProducts = () => {
   const { user } = useContext(AuthContext);
@@ -11,8 +12,8 @@ const AdminProducts = () => {
 
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/products");
-        const data = await res.json();
+        const res = await API.get("/api/products");
+        const data = res.data;
 
         console.log("PRODUCTS RESPONSE:", data);
 
@@ -34,26 +35,16 @@ const AdminProducts = () => {
 
     if (window.confirm("Are you strictly sure you want to delete this?")) {
       try {
-        const res = await fetch(
-          `http://localhost:5000/api/products/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
+        await API.delete(`/api/products/${id}`);
 
-        if (res.ok) {
-          setProducts((prev) =>
-            prev.filter((p) => p._id !== id)
-          );
-        } else {
-          const data = await res.json();
-          alert(data.message || "Delete failed");
-        }
+        setProducts((prev) =>
+          prev.filter((p) => p._id !== id)
+        );
       } catch (error) {
         console.error("Delete error:", error);
+
+        const data = error.response?.data;
+        alert(data?.message || "Delete failed");
       }
     }
   };

@@ -15,7 +15,7 @@ const AdminDashboard = () => {
 
     const fetchStats = async () => {
       try {
-        const res = await fetch('/api/analytics', {
+        const res = await fetch('https://shopsphere-p1l8.onrender.com/api/analytics', {
           headers: {
             Authorization: `Bearer ${user.token}`
           }

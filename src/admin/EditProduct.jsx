@@ -21,7 +21,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`/api/products/${id}`);
+        const res = await fetch(`https://shopsphere-p1l8.onrender.com/api/products/${id}`);
         const data = await res.json();
 
         setFormData({
@@ -56,7 +56,7 @@ const EditProduct = () => {
     }
 
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`https://shopsphere-p1l8.onrender.com/api/products/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${user.token}`,

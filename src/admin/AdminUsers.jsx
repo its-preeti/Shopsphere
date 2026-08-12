@@ -14,7 +14,7 @@ const AdminUsers = () => {
       }
 
       try {
-        const res = await fetch("/api/auth/users", {
+        const res = await fetch("https://shopsphere-p1l8.onrender.com/api/auth/users", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${user.token}`,
