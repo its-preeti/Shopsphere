@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://shopsphere-p1l8.onrender.com",
+  baseURL: "https://shopsphere-p1l8.onrender.com/api",
 });
 
 API.interceptors.request.use((config) => {
@@ -9,7 +9,10 @@ API.interceptors.request.use((config) => {
 
   if (userInfo) {
     const token = JSON.parse(userInfo).token;
-    config.headers.Authorization = `Bearer ${token}`;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
 
   return config;

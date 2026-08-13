@@ -8,18 +8,13 @@ dns.setServers([
 require("dotenv").config();
 
 const express = require("express");
-const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 
-dotenv.config();
-
 const app = express();
 
-// Connect Database (sirf ek baar)
 connectDB();
 
-// Routes
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
@@ -27,28 +22,39 @@ const wishlistRoutes = require("./routes/wishlistRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 
-// Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://shopsphere-bgdx5z2oi-its-preetis-projects.vercel.app",
+  "https://shopsphere-drab.vercel.app"
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://shopsphere-drab.vercel.app",
-      "https://shopsphere-6u1cg1wsc-its-preetis-projects.vercel.app"
-    ],
-    credentials: true
+    origin: function (origin, callback) {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 
-
+app.options("*", cors());
 
 app.use(express.json());
 
-// Test
 app.get("/", (req, res) => {
   res.send("ShopSphere API Running 🚀");
 });
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/analytics", analyticsRoutes);

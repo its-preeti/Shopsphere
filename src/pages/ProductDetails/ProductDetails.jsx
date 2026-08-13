@@ -20,7 +20,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await API.get(`/api/products/${id}`);
+        const response = await API.get(`/products/${id}`);
 
         console.log("Product Details:", response.data);
 

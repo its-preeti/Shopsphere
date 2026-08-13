@@ -11,16 +11,13 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await API.get("/api/products");
-
-        const data = response.data;
+        const { data } = await API.get("/products");
 
         const latestProducts = [...data].reverse().slice(0, 4);
 
         setProducts(latestProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
-        setProducts([]);
       } finally {
         setLoading(false);
       }
@@ -39,9 +36,7 @@ const Home = () => {
     <div>
       <section className="hero-banner">
         <div className="hero-content">
-          <span className="hero-label">
-            WELCOME TO SHOPSPHERE
-          </span>
+          <span className="hero-label">WELCOME TO SHOPSPHERE</span>
 
           <h1>
             Find something
@@ -67,9 +62,7 @@ const Home = () => {
       </section>
 
       <section className="featured-section">
-        <h2 className="all-products-title">
-          All Products
-        </h2>
+        <h2 className="all-products-title">All Products</h2>
 
         <input
           type="text"
@@ -81,13 +74,8 @@ const Home = () => {
 
         <div className="section-heading">
           <div>
-            <span className="section-label">
-              OUR PICKS
-            </span>
-
-            <h2>
-              Featured Products
-            </h2>
+            <span className="section-label">OUR PICKS</span>
+            <h2>Featured Products</h2>
           </div>
 
           <Link to="/shop" className="view-all">
@@ -96,13 +84,9 @@ const Home = () => {
         </div>
 
         {loading ? (
-          <div className="loading">
-            Loading products...
-          </div>
+          <div className="loading">Loading products...</div>
         ) : filteredProducts.length === 0 ? (
-          <div className="loading">
-            No products found.
-          </div>
+          <div className="loading">No products found.</div>
         ) : (
           <div className="product-grid">
             {filteredProducts.map((product) => (
