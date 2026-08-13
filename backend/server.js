@@ -24,7 +24,6 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://shopsphere-bgdx5z2oi-its-preetis-projects.vercel.app",
   "https://shopsphere-drab.vercel.app"
 ];
 
