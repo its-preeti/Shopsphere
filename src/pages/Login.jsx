@@ -19,11 +19,10 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const res = await API.post("/api/auth/login", {
-        email,
-        password,
-      });
-
+      const res = await API.post("/auth/login", {
+          email,
+         password,
+});
       const data = res.data;
 
       console.log("LOGIN RESPONSE:", data);
