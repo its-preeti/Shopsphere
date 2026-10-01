@@ -34,23 +34,16 @@ const Navbar = () => {
   alt="ShopSphere"
   className="navbar-logo"
 />
-
-          <span className="brand-name">
-            ShopSphere
-          </span>
-        </Link>
+     <span className="brand-name">ShopSphere</span> </Link>
       </div>
 
       {/* Navigation */}
       <ul className="navbar-links">
-
-        <li>
-          <Link to="/shop">Shop</Link>
+         <li><Link to="/shop">Shop</Link>
         </li>
 
         <li>
-          <Link to="/cart">
-            Cart{" "}
+          <Link to="/cart">Cart{" "}
             <span className="nav-count">
               {cartItems.length}
             </span>
@@ -58,8 +51,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <Link to="/wishlist">
-            Wishlist{" "}
+          <Link to="/wishlist">Wishlist{" "}
             <span className="nav-count">
               {wishlistItems.length}
             </span>
@@ -69,9 +61,7 @@ const Navbar = () => {
         {user ? (
           <>
             <li>
-              <Link to="/profile" className="user-link">
-                Hi, {user.name}
-              </Link>
+              <Link to="/profile" className="user-link">Hi, {user.name}</Link>
             </li>
 
             {user.role === "admin" && (

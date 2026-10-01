@@ -27,13 +27,13 @@ const Login = () => {
 
       console.log("LOGIN RESPONSE:", data);
 
-      // AuthContext me user save karo
+      
       login(data);
 
-      // LocalStorage me bhi save karo
+      
       localStorage.setItem("userInfo", JSON.stringify(data));
 
-      // Admin ko Admin Panel par bhejo
+      
       if (data.role === "admin") {
         navigate("/admin");
       } else {

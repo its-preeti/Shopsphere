@@ -24,7 +24,7 @@ const ProductDetail = () => {
 
         console.log("Product Details:", response.data);
 
-        setProduct(response.data);
+        setProduct(response.data); 
       } catch (error) {
         console.error("Product fetch error:", error);
         setProduct(null);

@@ -32,7 +32,7 @@ const Register = () => {
 
       localStorage.setItem("userInfo", JSON.stringify(data));
 
-      // Admin hai to Admin Panel par bhejo
+      
       if (data.role === "admin") {
         navigate("/admin");
       } else {

@@ -1,308 +1,311 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState,useContext,useEffect } from "react";
+
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import API from "../services/api";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    stock: ''
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    stock: ""
   });
 
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  if (!user || user.role !== 'admin') {
-    navigate('/');
+  /*ADMIN PROTECTION */
+
+  useEffect(() => {
+    if (!user || user.role !== "admin") {
+      navigate("/");
+    }
+  }, [user, navigate]);
+if (!user || user.role !== "admin") {
     return null;
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  /*INPUT HANDLER*/
 
-    if (!image) return alert('Please select an image');
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-    setLoading(true);
+  /*IMAGE HANDLER*/
 
-    const data = new FormData();
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
 
-    data.append('name', formData.name);
-    data.append('description', formData.description);
-    data.append('price', formData.price);
-    data.append('category', formData.category);
-    data.append('stock', formData.stock);
-    data.append('image', image);
-
-    try {
-      const res = await fetch('https://shopsphere-p1l8.onrender.com/api/products', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${user.token}`
-        },
-        body: data
-      });
-
-      const responseData = await res.json();
-
-      if (res.ok) {
-        alert('Product created successfully with Cloudinary Image URL!');
-        navigate('/shop');
-      } else {
-        alert(responseData.message || 'Error creating product');
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+    if (selectedImage) {
+      setImage(selectedImage);
     }
   };
 
-  return (
+  /* SUBMIT PRODUCT*/
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!image) {
+      alert("Please select a product image");
+      return;
+    }
+ try {
+      setLoading(true);
+
+      const data = new FormData();
+
+      data.append("name", formData.name);
+      data.append("description", formData.description);
+      data.append("price", formData.price);
+      data.append("category", formData.category);
+      data.append("stock", formData.stock);
+      data.append("image", image);
+
+      const res = await API.post("/products", data, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      });
+       console.log("PRODUCT RESPONSE:", res.data);
+       alert("Product created successfully!");
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        category: "",
+        stock: ""
+      });
+     setImage(null);
+      navigate("/shop");
+      } catch (error) {
+      console.error("ADD PRODUCT ERROR:", error);
+      const message =
+        error.response?.data?.message ||
+        "Error creating product";
+         alert(message);
+        } finally {
+      setLoading(false);
+    }
+  };
+return (
     <div style={pageStyle}>
-
       <div style={containerStyle}>
+      <h2 style={titleStyle}>Add New Product</h2>
+      <p style={subtitleStyle}>Add a new product to your ShopSphere store.</p>
+        <form onSubmit={handleSubmit}style={formStyle} >
 
-        <h2 style={titleStyle}>
-          Add New Product
-        </h2>
+   {/* PRODUCT NAME */}
 
-        <form
-          onSubmit={handleSubmit}
-          style={formStyle}
-        >
+     <div style={fieldStyle}> <label style={labelStyle}> Product Name </label>
+      <input type="text" name="name"placeholder="Enter product name"value={formData.name}onChange={handleChange} requiredstyle={inputStyle}  />
+          </div>
 
-          <input
-            type="text"
-            placeholder="Product Name"
-            required
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                name: e.target.value
-              })
-            }
-            style={inputStyle}
-          />
+          {/* DESCRIPTION */}
 
-          <textarea
-            placeholder="Description"
-            required
-            rows="4"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                description: e.target.value
-              })
-            }
-            style={{
-              ...inputStyle,
-              resize: 'vertical'
-            }}
-          />
+      <div style={fieldStyle}> <label style={labelStyle}> Description</label>
+         <textarea
+              name="description"
+              placeholder="Enter product description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              rows="4"
+              style={{
+                ...inputStyle,
+                resize: "vertical"
+              }}
+            />
+          </div>
 
-          <input
-            type="number"
-            placeholder="Price"
-            required
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                price: e.target.value
-              })
-            }
-            style={inputStyle}
-          />
+          {/* PRICE */}
 
-          <input
-            type="text"
-            placeholder="Category"
-            required
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                category: e.target.value
-              })
-            }
-            style={inputStyle}
-          />
+          <div style={fieldStyle}><label style={labelStyle}> Price </label>
+            <input
+              type="number"
+              name="price"
+              placeholder="Enter product price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+              min="0"
+              style={inputStyle}
+            />
+          </div>
 
-          <input
-            type="number"
-            placeholder="Stock Quantity"
-            required
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                stock: e.target.value
-              })
-            }
-            style={inputStyle}
-          />
+          {/* CATEGORY */}
+
+          <div style={fieldStyle}><label style={labelStyle}>Category</label>
+            <input
+              type="text"
+              name="category"
+              placeholder="e.g. Electronics, Fashion"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              style={inputStyle}
+            />
+          </div>
+
+          {/* STOCK */}
+
+          <div style={fieldStyle}><label style={labelStyle}>Stock Quantity </label>
+           <input
+              type="number"
+              name="stock"
+              placeholder="Enter stock quantity"
+              value={formData.stock}
+              onChange={handleChange}
+              required
+              min="0"
+              style={inputStyle}
+            />
+          </div>
+
+          {/* IMAGE */}
 
           <div style={uploadBoxStyle}>
-
-            <label style={labelStyle}>
-              Upload Product Image (Cloudinary)
-            </label>
-
+            <label style={labelStyle}>Product Image</label>
             <input
               type="file"
               accept="image/*"
+              onChange={handleImageChange}
               required
-              onChange={(e) =>
-                setImage(e.target.files[0])
-              }
               style={fileInputStyle}
             />
+           {image && (<p style={fileNameStyle}>Selected: {image.name} </p> )}
+            </div>
 
-          </div>
-
-          <button
+          {/* SUBMIT */}
+         <button
             type="submit"
             disabled={loading}
             className="btn"
-            style={buttonStyle}
+            style={{
+              ...buttonStyle,
+              opacity: loading ? 0.7 : 1,
+              cursor: loading
+                ? "not-allowed"
+                : "pointer"
+            }}
           >
             {loading
-              ? 'Uploading & Creating...'
-              : 'Publish Product'}
+              ? "Uploading & Creating..."
+              : "Publish Product"}
+
+            {!loading && (
+              <span style={{ marginLeft: "8px" }}>
+                →
+              </span>
+            )}
           </button>
-
         </form>
-
       </div>
-
     </div>
   );
 };
-
-
-/* =========================
-   THEME BASED STYLES
-========================= */
+/*STYLES*/
 
 const pageStyle = {
-  width: '100%',
-  minHeight: '80vh',
-  padding: '40px 20px',
-  background: 'var(--bg)',
-  color: 'var(--text)',
-  transition: 'all 0.3s ease'
+  width: "100%",
+  minHeight: "80vh",
+  padding: "40px 20px",
+  background: "var(--bg)",
+  color: "var(--text)",
+  transition: "all 0.3s ease"
 };
-
-
 const containerStyle = {
-  maxWidth: '600px',
-  margin: '0 auto',
-
-  background: 'var(--card-bg)',
-
-  padding: '40px',
-
-  borderRadius: '18px',
-
-  border: '1px solid var(--border)',
-
-  boxShadow: '0 15px 40px var(--shadow)',
-
-  transition: 'all 0.3s ease'
+  maxWidth: "600px",
+  margin: "0 auto",
+  background: "var(--card-bg)",
+  padding: "40px",
+  borderRadius: "18px",
+  border: "1px solid var(--border)",
+  boxShadow: "0 15px 40px var(--shadow)",
+  transition: "all 0.3s ease"
 };
-
 
 const titleStyle = {
-  color: 'var(--primary)',
-
-  marginBottom: '25px',
-
-  fontSize: '28px',
-
-  fontWeight: '700'
+  margin: "0 0 8px",
+  color: "var(--primary)",
+  fontSize: "28px",
+  fontWeight: "700"
 };
 
+const subtitleStyle = {
+  margin: "0 0 28px",
+  color: "var(--text-muted)",
+  fontSize: "14px"
+};
 
 const formStyle = {
-  display: 'flex',
-
-  flexDirection: 'column',
-
-  gap: '15px'
+  display: "flex",
+  flexDirection: "column",
+  gap: "18px"
 };
 
-
-const inputStyle = {
-  width: '100%',
-
-  padding: '13px 14px',
-
-  background: 'var(--input-bg)',
-
-  border: '1px solid var(--border)',
-
-  borderRadius: '9px',
-
-  color: 'var(--text)',
-
-  fontSize: '15px',
-
-  outline: 'none',
-
-  transition: 'all 0.3s ease'
+const fieldStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "7px"
 };
-
-
-const uploadBoxStyle = {
-  padding: '18px',
-
-  background: 'var(--input-bg)',
-
-  border: '1px dashed var(--primary)',
-
-  borderRadius: '10px',
-
-  transition: 'all 0.3s ease'
-};
-
 
 const labelStyle = {
-  display: 'block',
-
-  marginBottom: '12px',
-
-  color: 'var(--text-muted)',
-
-  fontSize: '14px',
-
-  fontWeight: '500'
+  color: "var(--text)",
+  fontSize: "14px",
+  fontWeight: "600"
 };
 
+const inputStyle = {
+  width: "100%",
+  padding: "13px 14px",
+  background: "var(--input-bg)",
+  border: "1px solid var(--border)",
+  borderRadius: "9px",
+  color: "var(--text)",
+  fontSize: "15px",
+  outline: "none",
+  boxSizing: "border-box",
+  transition: "all 0.3s ease"
+};
+
+const uploadBoxStyle = {
+  padding: "18px",
+  background: "var(--input-bg)",
+  border: "1px dashed var(--primary)",
+  borderRadius: "10px",
+  transition: "all 0.3s ease"
+};
 
 const fileInputStyle = {
-  width: '100%',
-
-  color: 'var(--text)',
-
-  background: 'transparent',
-
-  fontSize: '14px'
+  width: "100%",
+  color: "var(--text)",
+  background: "transparent",
+  fontSize: "14px"
 };
 
+const fileNameStyle = {
+  margin: "10px 0 0",
+  color: "var(--text-muted)",
+  fontSize: "13px",
+  wordBreak: "break-word"
+};
 
 const buttonStyle = {
-  marginTop: '10px',
-
-  width: '100%',
-
-  padding: '14px',
-
-  fontSize: '16px',
-
-  borderRadius: '10px'
+  marginTop: "5px",
+  width: "100%",
+  padding: "14px",
+  fontSize: "16px",
+  fontWeight: "600",
+  borderRadius: "10px",
+  border: "none"
 };
-
 
 export default AddProduct;

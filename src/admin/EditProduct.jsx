@@ -200,26 +200,18 @@ const EditProduct = () => {
   );
 };
 
-/* =====================================================
-   THEME BASED STYLES
-   ===================================================== */
+/*THEME BASED STYLES*/
 
 const containerStyle = {
   maxWidth: "600px",
   margin: "40px auto",
   padding: "40px",
-
   background: "var(--card-bg)",
-
   borderRadius: "16px",
-
   border: "1px solid var(--border)",
-
   color: "var(--text)",
-
-  boxShadow: "0 10px 35px var(--shadow)",
-
-  transition:
+  oxShadow: "0 10px 35px var(--shadow)",
+transition:
     "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
 };
 
@@ -232,61 +224,40 @@ const titleStyle = {
 
 const inputStyle = {
   width: "100%",
-
   padding: "13px 14px",
-
   background: "var(--input-bg)",
-
   border: "1px solid var(--border)",
-
-  borderRadius: "8px",
-
+  orderRadius: "8px",
   color: "var(--text)",
-
   fontSize: "15px",
-
-  outline: "none",
-
-  transition:
+   outline: "none",
+ transition:
     "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease",
-
-  fontFamily: "inherit",
+   fontFamily: "inherit",
 };
 
 const imageBoxStyle = {
   padding: "15px",
-
   border: "1px dashed var(--primary)",
-
   borderRadius: "8px",
-
   background: "var(--input-bg)",
-
   transition:
     "background-color 0.3s ease, border-color 0.3s ease",
 };
 
 const labelStyle = {
   display: "block",
-
   marginBottom: "10px",
-
   color: "var(--text-muted)",
-
   fontSize: "14px",
-
   fontWeight: "500",
 };
 
 const fileInputStyle = {
   width: "100%",
-
   color: "var(--text)",
-
   fontSize: "14px",
-
   background: "transparent",
-
   cursor: "pointer",
 };
 

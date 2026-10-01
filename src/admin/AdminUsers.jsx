@@ -49,10 +49,7 @@ const AdminUsers = () => {
       <div style={headerStyle}>
         <div>
           <h2 style={titleStyle}>User Directory</h2>
-
-          <p style={subtitleStyle}>
-            Manage and view registered ShopSphere users
-          </p>
+          <p style={subtitleStyle}>Manage and view registered ShopSphere user </p>
         </div>
 
         <div style={userCountStyle}>

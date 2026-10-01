@@ -85,17 +85,12 @@ const Wishlist = () => {
                     >
                       Remove
                     </button>
-
                   </div>
-
-                </div>
-
-              </div>
+                 </div>
+               </div>
             ))}
-
-          </div>
+         </div>
         )}
-
       </div>
     </div>
   );

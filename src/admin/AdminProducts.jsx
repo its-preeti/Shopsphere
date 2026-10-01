@@ -7,8 +7,7 @@ const AdminProducts = () => {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    if (!user?.token) return;
+  useEffect(() => {if (!user?.token) return;
 
     const fetchProducts = async () => {
       try {
@@ -164,9 +163,7 @@ const AdminProducts = () => {
   );
 };
 
-/* =====================================================
-   CONTAINER
-===================================================== */
+/* CONTAINER*/
 
 const containerStyle = {
   width: "100%",
@@ -182,9 +179,7 @@ const containerStyle = {
     "background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease",
 };
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* HEADER*/
 
 const headerStyle = {
   display: "flex",
@@ -218,9 +213,7 @@ const addBtn = {
   transition: "all 0.3s ease",
 };
 
-/* =====================================================
-   TABLE
-===================================================== */
+/* TABLE */
 
 const tableStyle = {
   width: "100%",
@@ -255,9 +248,7 @@ const priceStyle = {
   fontWeight: "700",
 };
 
-/* =====================================================
-   CATEGORY
-===================================================== */
+/* CATEGORY*/
 
 const categoryStyle = {
   display: "inline-block",
@@ -269,9 +260,7 @@ const categoryStyle = {
   fontSize: "13px",
 };
 
-/* =====================================================
-   EDIT BUTTON
-===================================================== */
+/* EDIT BUTTON*/
 
 const editBtn = {
   display: "inline-block",
@@ -286,9 +275,7 @@ const editBtn = {
   transition: "all 0.2s ease",
 };
 
-/* =====================================================
-   DELETE BUTTON
-===================================================== */
+/* DELETE BUTTON */
 
 const deleteBtn = {
   background: "#ef4444",

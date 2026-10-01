@@ -20,61 +20,44 @@ const Checkout = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
-  const totalPrice = cartItems.reduce(
+ const totalPrice = cartItems.reduce(
     (acc, item) => acc + Number(item.price) * Number(item.qty),
     0
   );
-
-  const handlePayment = async () => {
+const handlePayment = async () => {
     if (!user) {
       alert("Please login first");
       navigate("/login");
       return;
     }
-
-    if (cartItems.length === 0) {
+   if (cartItems.length === 0) {
       alert("Your cart is empty!");
       navigate("/cart");
       return;
     }
-
-    try {
+   try {
       setLoading(true);
 
-      // =========================
-      // CREATE RAZORPAY ORDER
-      // =========================
+     //CREATE RAZORPAY ORDER // 
 
       const orderRes = await API.post("/payment/order", {
         amount: totalPrice,
       });
-
       const orderData = orderRes.data;
-
-      console.log("Payment Order:", orderData);
-
-      if (!orderData) {
+     console.log("Payment Order:", orderData);
+   if (!orderData) {
         alert("Payment could not be initialized.");
         return;
       }
-
-      // =========================
-      // CHECK RAZORPAY
-      // =========================
-
-      if (!window.Razorpay) {
+   // CHECK RAZORPAY// 
+   if (!window.Razorpay) {
         alert(
           "Razorpay is not loaded. Please check Razorpay script."
         );
         return;
       }
-
-      // =========================
-      // RAZORPAY OPTIONS
-      // =========================
-
-      const options = {
+  // RAZORPAY OPTIONS// 
+   const options = {
         key:
           orderData.key ||
           "rzp_test_T5XcZKRMPuHhZd",
@@ -97,21 +80,12 @@ const Checkout = () => {
               response
             );
 
-            // =========================
-            // VERIFY PAYMENT
-            // =========================
+            
+            // VERIFY PAYMENT // 
 
-            const verifyRes = await API.post(
-              "/payment/verify",
-              response
-            );
-
+            const verifyRes = await API.post( "/payment/verify",response);
             const verifyData = verifyRes.data;
-
-            console.log(
-              "Payment Verification:",
-              verifyData
-            );
+            console.log( "Payment Verification:", verifyData );
 
             if (!verifyData) {
               alert(
@@ -120,9 +94,9 @@ const Checkout = () => {
               return;
             }
 
-            // =========================
-            // SAVE ORDER
-            // =========================
+             
+            // SAVE ORDER//
+             
 
             const saveOrderRes = await API.post(
               "/orders",
@@ -150,9 +124,9 @@ const Checkout = () => {
               savedOrder
             );
 
-            // =========================
-            // SUCCESS
-            // =========================
+            
+            //SUCCESS//
+             
 
             if (saveOrderRes.status >= 200 && saveOrderRes.status < 300) {
               dispatch(clearCart());
@@ -204,9 +178,9 @@ const Checkout = () => {
         },
       };
 
-      // =========================
-      // OPEN RAZORPAY
-      // =========================
+       
+      //OPEN RAZORPAY//
+       
 
       const razorpay =
         new window.Razorpay(options);
@@ -227,9 +201,9 @@ const Checkout = () => {
     }
   };
 
-  // =========================
-  // FORM SUBMIT
-  // =========================
+   
+  //FORM SUBMIT//
+   
 
   const handleSubmit = (e) => {
     e.preventDefault();

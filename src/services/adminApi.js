@@ -1,4 +1,3 @@
-
 import API from "./api";
 
 // GET ALL USERS

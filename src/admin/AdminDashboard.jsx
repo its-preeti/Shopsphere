@@ -7,12 +7,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
 
-  useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      navigate('/');
-      return;
-    }
-
+  useEffect(() => {if (!user || user.role !== 'admin') {navigate('/');return;}
     const fetchStats = async () => {
       try {
         const res = await fetch('https://shopsphere-p1l8.onrender.com/api/analytics', {
@@ -20,8 +15,7 @@ const AdminDashboard = () => {
             Authorization: `Bearer ${user.token}`
           }
         });
-
-        const data = await res.json();
+     const data = await res.json();
 
         if (res.ok) {
           setStats(data);
@@ -45,9 +39,7 @@ const AdminDashboard = () => {
     fetchStats();
   }, [user, navigate]);
 
-  /* =========================
-     THEME BASED STYLES
-  ========================= */
+  /* THEME BASED STYLES */
 
   const pageStyle = {
     padding: '30px 20px 50px',
@@ -146,9 +138,7 @@ const AdminDashboard = () => {
   return (
     <div style={pageStyle}>
 
-      {/* =========================
-          HEADER
-      ========================= */}
+      {/* HEADER*/}
 
       <div style={headerStyle}>
 
@@ -157,13 +147,8 @@ const AdminDashboard = () => {
           alt="Logo"
           style={logoStyle}
         />
-
-        <h2 style={headingStyle}>
-          Admin Dashboard
-        </h2>
-
-      </div>
-
+      <h2 style={headingStyle}>Admin Dashboard</h2>
+     </div>
       <p style={welcomeStyle}>
         Welcome back,{' '}
         <span style={nameStyle}>
@@ -171,14 +156,9 @@ const AdminDashboard = () => {
         </span>
       </p>
 
-
-      {/* =========================
-          STATISTICS
-      ========================= */}
-
+{/* STATISTICS*/}
       {stats ? (
-
-        <div
+         <div
           style={{
             display: 'grid',
             gridTemplateColumns:
@@ -189,102 +169,55 @@ const AdminDashboard = () => {
 
           {/* TOTAL ORDERS */}
 
-          <div style={cardStyle}>
+       <div style={cardStyle}>
+           <h4 style={cardTitleStyle}> Total Orders</h4>
+          <div style={numberStyle}>{stats.totalOrders}</div>
+       </div>
 
-            <h4 style={cardTitleStyle}>
-              Total Orders
-            </h4>
-
-            <div style={numberStyle}>
-              {stats.totalOrders}
-            </div>
-
-          </div>
-
-
-          {/* TOTAL PRODUCTS */}
+ {/* TOTAL PRODUCTS */}
 
           <div style={cardStyle}>
-
-            <h4 style={cardTitleStyle}>
-              Total Products
-            </h4>
-
-            <div style={numberStyle}>
-              {stats.totalProducts}
-            </div>
-
-          </div>
+            <h4 style={cardTitleStyle}>Total Products </h4>
+            <div style={numberStyle}>{stats.totalProducts} </div>
+       </div>
 
 
           {/* TOTAL USERS */}
 
           <div style={cardStyle}>
-
-            <h4 style={cardTitleStyle}>
-              Total Users
-            </h4>
-
-            <div style={numberStyle}>
-              {stats.totalUsers}
-            </div>
-
-          </div>
+            <h4 style={cardTitleStyle}>Total Users</h4>
+            <div style={numberStyle}>{stats.totalUsers}</div>
+       </div>
 
 
           {/* TOTAL REVENUE */}
 
           <div style={cardStyle}>
-
-            <h4 style={cardTitleStyle}>
-              Total Revenue
-            </h4>
-
-            <div style={numberStyle}>
-              ₹{stats.totalRevenue.toFixed(2)}
-            </div>
-
+             <h4 style={cardTitleStyle}>Total Revenue</h4>
+             <div style={numberStyle}> ₹{stats.totalRevenue.toFixed(2)} </div>
           </div>
-
-        </div>
-
-      ) : (
-
-        <div
+       </div>
+) : (
+      <div
           style={{
             textAlign: 'center',
             margin: '50px 0',
             color: 'var(--primary)'
-          }}
-        >
-          Loading metrics...
-        </div>
-
-      )}
+          }} > Loading metrics....  </div> )}
 
 
-      {/* =========================
-          ADMIN CONTROLS
-      ========================= */}
+      {/* ADMIN CONTROLS*/}
 
       <div style={controlsStyle}>
-
-        <h3 style={controlsTitleStyle}>
-          Administrative Controls
-        </h3>
-
-        <div style={controlsContainerStyle}>
+          <h3 style={controlsTitleStyle}> Administrative Controls </h3>
+       <div style={controlsContainerStyle}>
 
           {/* ADD PRODUCT */}
 
           <button
             className="btn"
             onClick={() =>
-              navigate('/admin/add-product')
-            }
-          >
-            + Add Product
-          </button>
+              navigate('/admin/add-product')  } >+ Add Product</button>
 
 
           {/* MANAGE PRODUCTS */}
@@ -294,10 +227,7 @@ const AdminDashboard = () => {
             onClick={() =>
               navigate('/admin/products')
             }
-            style={secondaryButtonStyle}
-          >
-            📦 Manage Products
-          </button>
+            style={secondaryButtonStyle}>📦 Manage Products</button>
 
 
           {/* MANAGE ORDERS */}
@@ -307,10 +237,7 @@ const AdminDashboard = () => {
             onClick={() =>
               navigate('/admin/orders')
             }
-            style={secondaryButtonStyle}
-          >
-            🚚 Manage Orders
-          </button>
+            style={secondaryButtonStyle}>🚚 Manage Orders </button>
 
 
           {/* USERS */}
@@ -320,15 +247,9 @@ const AdminDashboard = () => {
             onClick={() =>
               navigate('/admin/users')
             }
-            style={secondaryButtonStyle}
-          >
-            👥 Users Directory
-          </button>
-
-        </div>
-
+            style={secondaryButtonStyle} >👥 Users Directory</button>
+       </div>
       </div>
-
     </div>
   );
 };

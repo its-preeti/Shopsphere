@@ -1,14 +1,12 @@
-/* =====================================================
-   AUTH PAGE - LOGIN / REGISTER
-   ===================================================== */
+/* AUTH PAGE - LOGIN / REGISTER  */
 
 .auth-container {
   width: 100%;
   min-height: calc(100vh - 80px);
 
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
+  display: flex ;
+  justify-content: center ;
+  align-items: center;
 
   padding: 50px 20px;
 
@@ -19,9 +17,7 @@
   background: var(--bg);
 }
 
-/* =====================================================
-   BACKGROUND DECORATION
-===================================================== */
+/* BACKGROUND DECORATION*/
 
 .auth-container::before {
   content: "";
@@ -63,19 +59,13 @@
   pointer-events: none;
 }
 
-/* =====================================================
-   LEFT SIDE
-   HIDE EMPTY LEFT SECTION
-===================================================== */
+/* LEFT SIDE HIDE EMPTY LEFT SECTION*/
 
 .auth-left {
-  display: none !important;
+  display: none ;
 }
 
-/* =====================================================
-   RIGHT SIDE
-   CENTER FORM
-===================================================== */
+/* RIGHT SIDE CENTER FORM*/
 
 .auth-right {
   width: 100%;
@@ -90,12 +80,10 @@
   position: relative;
   z-index: 2;
 
-  margin: 0 auto !important;
+  margin: 0 auto;
 }
 
-/* =====================================================
-   FORM CARD
-===================================================== */
+/* FORM CARD*/
 
 .auth-form {
   width: 100%;
@@ -121,7 +109,7 @@
 
   overflow: hidden;
 
-  margin: 0 auto !important;
+  margin: 0 auto ;
 }
 
 /* Orange top line */
@@ -146,9 +134,7 @@
   );
 }
 
-/* =====================================================
-   LOGIN HEADING
-===================================================== */
+/* LOGIN HEADING*/
 
 .form-heading {
   margin-bottom: 28px;
@@ -166,9 +152,7 @@
   letter-spacing: 0.3px;
 }
 
-/* =====================================================
-   REGISTER HEADER
-===================================================== */
+/* REGISTER HEADER*/
 
 .form-header {
   text-align: center;
@@ -212,9 +196,7 @@
   font-size: 14px;
 }
 
-/* =====================================================
-   INPUT GROUP
-===================================================== */
+/* INPUT GROUP*/
 
 .input-group {
   width: 100%;
@@ -236,9 +218,7 @@
   color: var(--text);
 }
 
-/* =====================================================
-   INPUT
-===================================================== */
+/* INPUT*/
 
 .input-group input {
   width: 100%;
@@ -277,9 +257,7 @@
     0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
-/* =====================================================
-   PASSWORD LABEL
-===================================================== */
+/* PASSWORD LABEL*/
 
 .password-label {
   display: flex;
@@ -305,9 +283,7 @@
   text-decoration: underline;
 }
 
-/* =====================================================
-   REGISTER BUTTON
-===================================================== */
+/* REGISTER BUTTON*/
 
 .auth-submit {
   width: 100%;
@@ -369,9 +345,7 @@
   transform: translateY(0);
 }
 
-/* =====================================================
-   LOGIN BUTTON
-===================================================== */
+/* LOGIN BUTTON*/
 
 .login-btn {
   width: 100%;
@@ -437,9 +411,7 @@
   transform: none;
 }
 
-/* =====================================================
-   CREATE ACCOUNT
-===================================================== */
+/* CREATE ACCOUNT*/
 
 .create-account {
   display: flex;
@@ -468,9 +440,7 @@
   color: #f97316;
 }
 
-/* =====================================================
-   DIVIDER
-===================================================== */
+/* DIVIDER*/
 
 .auth-divider {
   display: flex;
@@ -497,9 +467,7 @@
   background: var(--border-color);
 }
 
-/* =====================================================
-   REGISTER SWITCH
-===================================================== */
+/* REGISTER SWITCH*/
 
 .auth-switch {
   text-align: center;
@@ -523,9 +491,7 @@
   text-decoration: underline;
 }
 
-/* =====================================================
-   TERMS TEXT
-===================================================== */
+/* TERMS TEXT */
 
 .auth-footer {
   margin: 15px 0 0;
@@ -539,9 +505,7 @@
   line-height: 1.5;
 }
 
-/* =====================================================
-   LIGHT THEME
-===================================================== */
+/* LIGHT THEME */
 
 .light-theme .auth-container {
   background: var(--bg);
@@ -556,9 +520,7 @@
     0 25px 70px rgba(0, 0, 0, 0.10);
 }
 
-/* =====================================================
-   DARK THEME
-===================================================== */
+/*DARK THEME*/
 
 .dark-theme .auth-container {
   background: var(--bg);
@@ -573,9 +535,7 @@
     0 25px 70px rgba(0, 0, 0, 0.30);
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* MOBILE*/
 
 @media (max-width: 600px) {
 
@@ -600,9 +560,7 @@
   }
 }
 
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
+/*  SMALL MOBILE*/
 
 @media (max-width: 400px) {
 

@@ -6,15 +6,9 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user?.token) {
-      setLoading(false);
-      return;
-    }
+  useEffect(() => {if (!user?.token) {setLoading(false);return; }
 
-    const fetchOrders = async () => {
-      try {
-        setLoading(true);
+    const fetchOrders = async () => {try {setLoading(true);
 
         const res = await fetch("https://shopsphere-p1l8.onrender.com/api/orders", {
           method: "GET",
@@ -96,9 +90,7 @@ const AdminOrders = () => {
     return (
       <div style={containerStyle}>
         <h2 style={titleStyle}>Manage Orders</h2>
-        <p style={emptyStyle}>
-          Please login to view orders.
-        </p>
+        <p style={emptyStyle}>Please login to view orders.</p>
       </div>
     );
   }
@@ -106,8 +98,7 @@ const AdminOrders = () => {
   return (
     <div style={containerStyle}>
       <h2 style={titleStyle}>Manage Orders</h2>
-
-      <div style={{ overflowX: "auto" }}>
+       <div style={{ overflowX: "auto" }}>
         <table style={tableStyle}>
           <thead>
             <tr style={rowStyle}>
@@ -122,9 +113,7 @@ const AdminOrders = () => {
           <tbody>
             {orders.length === 0 ? (
               <tr>
-                <td colSpan="5" style={emptyStyle}>
-                  No orders found
-                </td>
+                <td colSpan="5" style={emptyStyle}> No orders found</td>
               </tr>
             ) : (
               orders.map((order) => (
@@ -162,17 +151,9 @@ const AdminOrders = () => {
                       }
                       style={selectStyle}
                     >
-                      <option value="Pending">
-                        Pending
-                      </option>
-
-                      <option value="Shipped">
-                        Shipped
-                      </option>
-
-                      <option value="Delivered">
-                        Delivered
-                      </option>
+                      <option value="Pending"> Pending </option>
+                      <option value="Shipped">Shipped </option>
+                      <option value="Delivered"> Delivered </option>
                     </select>
                   </td>
                 </tr>
