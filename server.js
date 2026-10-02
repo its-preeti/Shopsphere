@@ -54,7 +54,12 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("ShopSphere API Running 🚀");
 });
-
+app.get("/api/test", (req, res) => {
+  res.json({
+    message: "ShopSphere backend is working",
+    authRoutes: "loaded"
+  });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/analytics", analyticsRoutes);
