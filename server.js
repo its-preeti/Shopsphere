@@ -24,7 +24,6 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://shopsphere-bgdx5z2oi-its-preetis-projects.vercel.app",
   "https://shopsphere-drab.vercel.app"
 ];
 
@@ -35,7 +34,10 @@ app.use(
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(origin)) {
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
         return callback(null, true);
       }
 
@@ -46,8 +48,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
-
-app.options("*", cors());
 
 app.use(express.json());
 

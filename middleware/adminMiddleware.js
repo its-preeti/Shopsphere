@@ -1,28 +1,9 @@
- id="4g5pbm"
-const admin =
-(req, res, next) => {
-
-  if (
-    req.user &&
-    req.user.isAdmin
-  ) {
-
+const admin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
     next();
-
   } else {
-
-    res.status(401).json({
-
-      message:
-      "Admin Access Denied",
-
-    });
-
+    res.status(401).json({ message: 'Not authorized as an admin' });
   }
-
 };
 
-module.exports = {
-  admin,
-};
-
+module.exports = { admin };

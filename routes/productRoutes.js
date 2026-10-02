@@ -1,55 +1,49 @@
-const express =
-require("express");
-
-const router =
-express.Router();
+const express = require("express");
 
 const {
-
   getProducts,
-
-  addProduct,
-
-  getSingleProduct,
-
+  getProductById,
+  createProduct,
+  updateProduct,
   deleteProduct,
+} = require("../controllers/productController");
 
-} = require(
-"../controllers/productController"
-);
+const { protect } = require("../middleware/authMiddleware");
+const { admin } = require("../middleware/adminMiddleware");
 
+const multer = require("multer");
 
-// GET ALL
+const upload = multer({
+  dest: "uploads/",
+});
 
-router.get(
-  "/",
-  getProducts
-);
+const router = express.Router();
 
+// GET PRODUCTS + CREATE PRODUCT
+router
+  .route("/")
+  .get(getProducts)
+  .post(
+    protect,
+    admin,
+    upload.single("image"),
+    createProduct
+  );
 
-// GET SINGLE
+// SINGLE PRODUCT
+router
+  .route("/:id")
+  .get(getProductById)
+  .put(
+    protect,
+    admin,
+    upload.single("image"),
+    updateProduct
+  )
+  .delete(
+    protect,
+    admin,
+    deleteProduct
+  );
 
-router.get(
-  "/:id",
-  getSingleProduct
-);
-
-
-// ADD PRODUCT
-
-router.post(
-  "/add",
-  addProduct
-);
-
-
-// DELETE PRODUCT
-
-router.delete(
-  "/:id",
-  deleteProduct
-);
-
-
-module.exports =
-router;
+module.exports = router;
