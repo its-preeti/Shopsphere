@@ -83,7 +83,7 @@ const importData = async () => {
 
     console.log("✅ Data Imported Successfully!");
     console.log("👤 Admin: admin@shopsphere.com");
-    console.log("🔑 Password: password123");
+    console.log("🔑 Password: password@123");
 
     process.exit(0);
   } catch (error) {
